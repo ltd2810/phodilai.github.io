@@ -26,6 +26,8 @@ const customizationOptions = {
     ]
 };
 
+const noCustomizationIds = [1, 11, 12, 13, 14];
+
 let cart = [];
 let currentCustomizingItem = null;
 
@@ -65,46 +67,54 @@ function showCustomizationModal(item) {
     if (!modal) return;
     
     const customizationItemName = document.getElementById('customizationItemName');
+    const sugarOptionsDiv = document.getElementById('sugarOptions');
+    const iceOptionsDiv = document.getElementById('iceOptions');
+    const toppingOptionsDiv = document.getElementById('toppingOptions');
+
     if (customizationItemName) {
         customizationItemName.innerText = currentCustomizingItem.name;
     }
     
-    const sugarOptionsDiv = document.getElementById('sugarOptions');
-    if (sugarOptionsDiv) {
-        sugarOptionsDiv.innerHTML = `
-            ${customizationOptions.sugar.map(level => `
-                <label>
-                    <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
-                    ${level}%
-                </label>
-            `).join('')}
-        `;
-    }
-
-    const iceOptionsDiv = document.getElementById('iceOptions');
-    if (iceOptionsDiv) {
-        iceOptionsDiv.innerHTML = `
-            ${customizationOptions.ice.map(level => `
-                <label>
-                    <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
-                    ${level}%
-                </label>
-            `).join('')}
-        `;
-    }
-
-    const toppingOptionsDiv = document.getElementById('toppingOptions');
-    if (toppingOptionsDiv) {
-        toppingOptionsDiv.innerHTML = '';
-        if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
-            toppingOptionsDiv.innerHTML = `
-                ${customizationOptions.toppings.map(topping => `
+    // Kiểm tra xem món có tùy chỉnh không
+    if (noCustomizationIds.includes(item.id)) {
+        if (sugarOptionsDiv) sugarOptionsDiv.innerHTML = '';
+        if (iceOptionsDiv) iceOptionsDiv.innerHTML = '';
+        if (toppingOptionsDiv) toppingOptionsDiv.innerHTML = '';
+    } else {
+        if (sugarOptionsDiv) {
+            sugarOptionsDiv.innerHTML = `
+                ${customizationOptions.sugar.map(level => `
                     <label>
-                        <input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}">
-                        ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)
+                        <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
+                        ${level}%
                     </label>
                 `).join('')}
             `;
+        }
+    
+        if (iceOptionsDiv) {
+            iceOptionsDiv.innerHTML = `
+                ${customizationOptions.ice.map(level => `
+                    <label>
+                        <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
+                        ${level}%
+                    </label>
+                `).join('')}
+            `;
+        }
+
+        if (toppingOptionsDiv) {
+            toppingOptionsDiv.innerHTML = '';
+            if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
+                toppingOptionsDiv.innerHTML = `
+                    ${customizationOptions.toppings.map(topping => `
+                        <label>
+                            <input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}">
+                            ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)
+                        </label>
+                    `).join('')}
+                `;
+            }
         }
     }
     
@@ -122,25 +132,32 @@ function closeCustomizationModal() {
 function addToCartFromModal() {
     if (!currentCustomizingItem) return;
     
-    const selectedSugarInput = document.querySelector('input[name="sugar"]:checked');
-    const selectedIceInput = document.querySelector('input[name="ice"]:checked');
-    const itemQuantityInput = document.getElementById('itemQuantity');
+    const quantity = parseInt(document.getElementById('itemQuantity').value);
     
-    if (!selectedSugarInput || !selectedIceInput || !itemQuantityInput) {
-        alert("Vui lòng chọn mức đường, đá và số lượng!");
-        return;
+    let selectedSugar = 'N/A';
+    let selectedIce = 'N/A';
+    let selectedToppings = [];
+    let toppingPrice = 0;
+
+    if (!noCustomizationIds.includes(currentCustomizingItem.id)) {
+        const selectedSugarInput = document.querySelector('input[name="sugar"]:checked');
+        const selectedIceInput = document.querySelector('input[name="ice"]:checked');
+
+        if (!selectedSugarInput || !selectedIceInput) {
+            alert("Vui lòng chọn mức đường và đá!");
+            return;
+        }
+
+        selectedSugar = selectedSugarInput.value;
+        selectedIce = selectedIceInput.value;
+        
+        selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
+            name: cb.value,
+            price: parseInt(cb.dataset.price)
+        }));
+        toppingPrice = selectedToppings.reduce((total, topping) => total + topping.price, 0);
     }
-
-    const selectedSugar = selectedSugarInput.value;
-    const selectedIce = selectedIceInput.value;
-    const quantity = parseInt(itemQuantityInput.value);
-
-    const selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
-        name: cb.value,
-        price: parseInt(cb.dataset.price)
-    }));
-
-    const toppingPrice = selectedToppings.reduce((total, topping) => total + topping.price, 0);
+    
     const itemWithCustomization = {
         ...currentCustomizingItem,
         quantity: quantity,
@@ -181,7 +198,7 @@ function renderCart() {
             totalPrice += itemTotal;
             
             let customizationString = '';
-            if (item.sugar || item.ice || (item.toppings && item.toppings.length > 0)) {
+            if (item.sugar !== 'N/A' || item.ice !== 'N/A' || (item.toppings && item.toppings.length > 0)) {
                 const toppingsNames = item.toppings.map(t => t.name).join(', ');
                 customizationString = ` (${item.sugar} đường, ${item.ice} đá${toppingsNames ? `, Topping: ${toppingsNames}` : ''})`;
             }
@@ -189,9 +206,9 @@ function renderCart() {
             const cartItemHtml = `
                 <div class="cart-item">
                     <div class="order-details">
-                        <span>${item.name}${customizationString}</span>
+                        <span>${item.name} (SL: ${item.quantity})${customizationString}</span>
                         <br>
-                        <span>${item.price.toLocaleString('vi-VN')} VNĐ</span>
+                        <span>${(item.price * item.quantity).toLocaleString('vi-VN')} VNĐ</span>
                     </div>
                     <div class="order-actions">
                         <button class="decrease-quantity-btn" data-index="${index}">-</button>
@@ -282,4 +299,94 @@ async function submitOrder() {
     
     const orderType = submitBtn.dataset.orderType;
     let customerInfo = {};
-    const orderNoteEl
+    const orderNoteEl = document.getElementById('orderNote');
+    const orderNote = orderNoteEl ? orderNoteEl.value : '';
+
+    if (orderType === 'dine-in') {
+        const tableNumberEl = document.getElementById('tableNumber');
+        const tableNumber = tableNumberEl ? tableNumberEl.value : '';
+        if (!tableNumber) {
+            alert("Vui lòng nhập số bàn!");
+            return;
+        }
+        customerInfo = { type: 'Uống tại chỗ', tableNumber };
+    } else if (orderType === 'delivery') {
+        const customerNameEl = document.getElementById('customerName');
+        const phoneEl = document.getElementById('phone');
+        const addressEl = document.getElementById('address');
+        const customerName = customerNameEl ? customerNameEl.value : '';
+        const phone = phoneEl ? phoneEl.value : '';
+        const address = addressEl ? addressEl.value : '';
+        
+        if (!customerName || !phone || !address) {
+            alert("Vui lòng điền đầy đủ thông tin giao hàng!");
+            return;
+        }
+        customerInfo = { type: 'Giao hàng', customerName, phone, address };
+    } else {
+        alert("Có lỗi xảy ra, vui lòng thử lại!");
+        return;
+    }
+
+    const totalPriceSpan = document.getElementById('totalPrice');
+    if (!totalPriceSpan) {
+        alert("Không tìm thấy tổng tiền, vui lòng tải lại trang!");
+        return;
+    }
+
+    const newOrder = {
+        items: cart,
+        customerInfo: customerInfo,
+        totalPrice: parseFloat(totalPriceSpan.innerText.replace(/[^0-9]/g, '')),
+        status: 'Đang chờ xử lý',
+        isPaid: false,
+        note: orderNote,
+        createdAt: new Date()
+    };
+    
+    try {
+        await addDoc(collection(db, "orders"), newOrder);
+        alert("Đơn hàng của bạn đã được gửi thành công!");
+        cart = [];
+        renderCart();
+        closeOrderModal();
+    } catch (e) {
+        console.error("Lỗi khi thêm đơn hàng: ", e);
+        alert("Có lỗi xảy ra khi gửi đơn hàng!");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderMenu();
+    renderCart();
+
+    const dineInBtn = document.getElementById('dineInBtn');
+    if (dineInBtn) {
+        dineInBtn.addEventListener('click', () => showOrderModal('dine-in'));
+    }
+
+    const deliveryBtn = document.getElementById('deliveryBtn');
+    if (deliveryBtn) {
+        deliveryBtn.addEventListener('click', () => showOrderModal('delivery'));
+    }
+
+    const submitOrderBtn = document.getElementById('submitOrderBtn');
+    if (submitOrderBtn) {
+        submitOrderBtn.addEventListener('click', submitOrder);
+    }
+    
+    const addToCartModalBtn = document.getElementById('addToCartModalBtn');
+    if (addToCartModalBtn) {
+        addToCartModalBtn.addEventListener('click', addToCartFromModal);
+    }
+    
+    const closeCustomizationModalBtn = document.getElementById('closeCustomizationModal');
+    if (closeCustomizationModalBtn) {
+        closeCustomizationModalBtn.addEventListener('click', closeCustomizationModal);
+    }
+
+    const closeOrderModalBtn = document.getElementById('closeOrderModal');
+    if (closeOrderModalBtn) {
+        closeOrderModalBtn.addEventListener('click', closeOrderModal);
+    }
+});
