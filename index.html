@@ -84,25 +84,6 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-
-        /* Thêm CSS cho nút số lượng */
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .quantity-control button {
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .quantity-control span {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -127,20 +108,10 @@
             <span class="close-btn" id="closeCustomizationModal">&times;</span>
             <h3 id="customizationItemName"></h3>
             <div class="customization-options">
-                <div class="quantity-control">
-                    <h4>Số lượng: </h4>
-                    <button id="decreaseQuantity">-</button>
-                    <span id="modalQuantity">1</span>
-                    <button id="increaseQuantity">+</button>
-                </div>
-                
-                <div id="iceSugarOptions">
-                    <h4>Đường</h4>
-                    <div id="sugarOptions" class="options-group"></div>
-                    <h4>Đá</h4>
-                    <div id="iceOptions" class="options-group"></div>
-                </div>
-
+                <h4>Đường</h4>
+                <div id="sugarOptions" class="options-group"></div>
+                <h4>Đá</h4>
+                <div id="iceOptions" class="options-group"></div>
                 <h4>Topping</h4>
                 <div id="toppingOptions" class="options-group"></div>
             </div>
