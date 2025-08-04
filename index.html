@@ -1,201 +1,172 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phố Đi Lại Lý Nhân</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Đặt hàng</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
     <style>
-        .custom-quantity {
-            display: flex;
+        /* CSS cho modal tùy chỉnh món */
+        #customizationModal.modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
             align-items: center;
         }
 
-        .custom-quantity button {
-            background-color: #f8f9fa;
-            border: 1px solid #ced4da;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 1rem;
+        /* CSS cho modal đặt hàng */
+        #orderModal.modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
         }
 
-        .custom-quantity input {
-            width: 50px;
-            text-align: center;
-            border: 1px solid #ced4da;
-            margin: 0 5px;
-            padding: 5px;
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .options-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .options-group button {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .options-group button.selected {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        /* Thêm CSS cho nút số lượng */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .quantity-control button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .quantity-control span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .order-options label, .order-options input {
+            display: block;
+            margin-bottom: 10px;
         }
     </style>
 </head>
-
 <body>
-    <div class="container-fluid">
-        <header class="text-center my-4">
-            <h1 class="main-title">PHỐ ĐI LẠI LÝ NHÂN</h1>
-            <p class="subtitle">Đường Lý Nhân, Vĩnh Tường, Vĩnh Phúc</p>
+    <div class="container">
+        <header>
+            <h1>Phố Đi Lại Lý Nhân</h1>
+            <p>Đường Lý Nhân, Vĩnh Tường, Vĩnh Phúc</p>
         </header>
 
-        <section id="menu" class="p-3">
-            <h2 class="section-title text-center">Menu</h2>
-            <div class="row row-cols-1 row-cols-md-3 g-4" id="menu-items">
-                </div>
-        </section>
-        <div class="modal fade" id="customizeModal" tabindex="-1" aria-labelledby="customizeModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="customizeModalLabel">Tùy chỉnh món</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h4 id="customizeItemName"></h4>
-                        <div id="customizeOptions">
-                            <div class="mb-3" id="quantity-container">
-                                <label for="quantityInput" class="form-label">Số lượng</label>
-                                <div class="custom-quantity">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button"
-                                        id="decreaseQuantity">-</button>
-                                    <input type="number" class="form-control text-center" id="quantityInput" value="1"
-                                        min="1">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button"
-                                        id="increaseQuantity">+</button>
-                                </div>
-                            </div>
-                            <div id="ice-sugar-options">
-                                <div class="mb-3">
-                                    <label class="form-label">Tỷ lệ đá</label>
-                                    <div class="btn-group w-100" role="group" aria-label="Ice level">
-                                        <input type="radio" class="btn-check" name="ice" id="ice100" autocomplete="off"
-                                            checked>
-                                        <label class="btn btn-outline-primary" for="ice100">100%</label>
-                                        <input type="radio" class="btn-check" name="ice" id="ice70" autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="ice70">70%</label>
-                                        <input type="radio" class="btn-check" name="ice" id="ice50" autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="ice50">50%</label>
-                                        <input type="radio" class="btn-check" name="ice" id="ice30" autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="ice30">30%</label>
-                                        <input type="radio" class="btn-check" name="ice" id="ice0" autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="ice0">0%</label>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Tỷ lệ đường</label>
-                                    <div class="btn-group w-100" role="group" aria-label="Sugar level">
-                                        <input type="radio" class="btn-check" name="sugar" id="sugar100"
-                                            autocomplete="off" checked>
-                                        <label class="btn btn-outline-primary" for="sugar100">100%</label>
-                                        <input type="radio" class="btn-check" name="sugar" id="sugar70"
-                                            autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="sugar70">70%</label>
-                                        <input type="radio" class="btn-check" name="sugar" id="sugar50"
-                                            autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="sugar50">50%</label>
-                                        <input type="radio" class="btn-check" name="sugar" id="sugar30"
-                                            autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="sugar30">30%</label>
-                                        <input type="radio" class="btn-check" name="sugar" id="sugar0"
-                                            autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="sugar0">0%</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 form-check d-none" id="topping-option-nha-dam">
-                                <input type="checkbox" class="form-check-input" id="topping-nha-dam">
-                                <label class="form-check-label" for="topping-nha-dam">Nha đam (+5,000 VNĐ)</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="me-auto">
-                            <strong>Tổng giá: <span id="modal-total-price">0 VNĐ</span></strong>
-                        </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-success" id="addItemToCartButton">Thêm vào giỏ</button>
-                    </div>
-                </div>
+        <section id="menu">
+            </section>
+        
+        <div id="cart">
+            <h2>Giỏ Hàng</h2>
+            <div id="cartItems"></div>
+            <p>Tổng cộng: <span id="totalPrice">0 VNĐ</span></p>
+            <div class="order-info">
+                <button id="clearCartBtn">Xóa giỏ hàng</button>
             </div>
         </div>
 
-        <section id="cart-section" class="p-3">
-            <h2 class="section-title text-center">Giỏ Hàng</h2>
-            <div id="cart-items" class="list-group">
-                </div>
-            <div class="cart-summary mt-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4>Tổng cộng: <span id="cart-total-price">0 VNĐ</span></h4>
-                    <button class="btn btn-danger" id="clearCartButton"><i class="fas fa-trash-alt"></i> Xóa Giỏ
-                        Hàng</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="order-form-section" class="p-3 mb-5">
-            <h2 class="section-title text-center">Đặt Hàng</h2>
-            <div class="btn-group d-flex" role="group">
-                <input type="radio" class="btn-check" name="orderType" id="dineIn" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="dineIn">Uống Tại Chỗ</label>
-
-                <input type="radio" class="btn-check" name="orderType" id="delivery" autocomplete="off">
-                <label class="btn btn-outline-primary" for="delivery">Đặt Giao Hàng</label>
-            </div>
-            <div id="dineInForm" class="mt-3">
-                <div class="mb-3">
-                    <label for="tableNumber" class="form-label">Số Bàn</label>
-                    <input type="number" class="form-control" id="tableNumber" placeholder="Nhập số bàn..." required>
-                </div>
-            </div>
-            <div id="deliveryForm" class="mt-3 d-none">
-                <div class="mb-3">
-                    <label for="customerName" class="form-label">Tên</label>
-                    <input type="text" class="form-control" id="customerName" placeholder="Nhập tên..." required>
-                </div>
-                <div class="mb-3">
-                    <label for="customerPhone" class="form-label">Số Điện Thoại</label>
-                    <input type="tel" class="form-control" id="customerPhone" placeholder="Nhập số điện thoại..."
-                        required>
-                </div>
-                <div class="mb-3">
-                    <label for="customerAddress" class="form-label">Địa Chỉ</label>
-                    <input type="text" class="form-control" id="customerAddress" placeholder="Nhập địa chỉ..." required>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="customerNote" class="form-label">Ghi Chú</label>
-                <textarea class="form-control" id="customerNote" rows="3" placeholder="Ghi chú thêm..."></textarea>
-            </div>
-            <button class="btn btn-success w-100" id="placeOrderButton"><i class="fas fa-paper-plane"></i> Gửi Đơn
-                Hàng</button>
-        </section>
-
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert"
-                aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body" id="toast-message">
-                        Đơn hàng đã được gửi thành công!
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Close"></button>
-                </div>
-            </div>
+        <div class="order-info">
+            <button id="dineInBtn">Uống Tại Chỗ</button>
+            <button id="deliveryBtn">Đặt Giao Hàng</button>
         </div>
-
     </div>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="script-client.js"></script>
-</body>
 
+    <div id="customizationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeCustomizationModal">&times;</span>
+            <h3 id="customizationItemName"></h3>
+            <div class="customization-options">
+                <div class="quantity-control">
+                    <h4>Số lượng: </h4>
+                    <button id="decreaseQuantity">-</button>
+                    <span id="modalQuantity">1</span>
+                    <button id="increaseQuantity">+</button>
+                </div>
+                
+                <div id="iceSugarOptions">
+                    <h4>Đường</h4>
+                    <div id="sugarOptions" class="options-group"></div>
+                    <h4>Đá</h4>
+                    <div id="iceOptions" class="options-group"></div>
+                </div>
+
+                <h4>Topping</h4>
+                <div id="toppingOptions" class="options-group"></div>
+            </div>
+            <button id="addToCartModalBtn">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeOrderModal">&times;</span>
+            <h3 id="orderModalTitle"></h3>
+            <div id="orderOptions" class="order-options">
+                </div>
+            <button id="submitOrderBtn">Gửi Đơn Hàng</button>
+        </div>
+    </div>
+    
+    <script type="module" src="script-client.js"></script>
+</body>
 </html>
