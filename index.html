@@ -84,19 +84,36 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
+        /* Thêm CSS cho nút số lượng */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .quantity-control button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .quantity-control span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>PHỐ ĐI LẠI LÝ NHÂN</h1>
         <div id="menu" class="menu-container">
-            <!-- Menu items will be rendered here by JavaScript -->
-        </div>
+            </div>
 
         <h1>Giỏ Hàng</h1>
         <div id="cart">
-            <!-- Cart items will be rendered here by JavaScript -->
-        </div>
+            </div>
         <p>Tổng tiền: <span id="totalPrice">0</span> VNĐ</p>
 
         <div class="order-buttons">
@@ -105,16 +122,25 @@
         </div>
     </div>
 
-    <!-- Hộp thoại tùy chỉnh (Customization Modal) -->
     <div id="customizationModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeCustomizationModal">&times;</span>
             <h3 id="customizationItemName"></h3>
             <div class="customization-options">
-                <h4>Đường</h4>
-                <div id="sugarOptions" class="options-group"></div>
-                <h4>Đá</h4>
-                <div id="iceOptions" class="options-group"></div>
+                <div class="quantity-control">
+                    <h4>Số lượng: </h4>
+                    <button id="decreaseQuantity">-</button>
+                    <span id="modalQuantity">1</span>
+                    <button id="increaseQuantity">+</button>
+                </div>
+                
+                <div id="iceSugarOptions">
+                    <h4>Đường</h4>
+                    <div id="sugarOptions" class="options-group"></div>
+                    <h4>Đá</h4>
+                    <div id="iceOptions" class="options-group"></div>
+                </div>
+
                 <h4>Topping</h4>
                 <div id="toppingOptions" class="options-group"></div>
             </div>
@@ -122,14 +148,12 @@
         </div>
     </div>
 
-    <!-- Hộp thoại đặt hàng (Order Modal) -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeOrderModal">&times;</span>
             <h3 id="orderModalTitle"></h3>
             <div id="orderOptions" class="order-options">
-                <!-- Nội dung sẽ được render bằng JavaScript -->
-            </div>
+                </div>
             <button id="submitOrderBtn">Gửi Đơn Hàng</button>
         </div>
     </div>
