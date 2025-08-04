@@ -2,7 +2,7 @@ import { db } from './firebase-config.js';
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const menuItems = [
-    { id: 1, name: 'Trà Đá', price: 5000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/528467272_1088978119425078_2155584391935203864_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE8KngH6lQGpCaJPqs1qYepMyAC2J3e4DwzIALYnd7gPPeFYU3bIXha77SWzRvR9Zfq4X6PVEnoZsAe68Y78RQN&_nc_ohc=N_OgxAkk42oQ7kNvwHbPqIm&_nc_oc=AdkPGcUanFFqRnhWJFp6pqjFCoEDTQ_8dCq1vs9e0Zgyr_HC5AWe6fJNyAUGi1a-5Bs&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEfxzLheoCdwR9p7x_fM7tHjPz1Q614Ww&oe=6664972E' },
+    { id: 1, name: 'Trà Đá', price: 5000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/528467272_1088978119425078_2155584391935203864_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE8KngH6lQGpCaJPqs1qYepMyAC2J3e4DwzIALYnd7gPPeFYU3bIXha77SWzRvR9Zfq4X6PVEnoZsAe68Y78RQN&_nc_ohc=N_OgxAkk42oQ7kNvwHbPqIm&_nc_oc=AdkPGcUanFFqRnhWJFp6pqjFCoEDTQ_8dCq1vs9e0Zgyr_HC5AWe6fJNyAUGi1a-5Bs&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEfxzLheoCdwR9p7XPGTDnQsL1StTCc0EPXhXRainL3Zw&oe=68B7DD19' },
     { id: 2, name: 'Trà Chanh', price: 10000, image: 'https://scontent.fhan3-4.fna.fbcdn.net/v/t1.15752-9/524128035_1024804109561671_3486439221231126237_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEsWJNZoX5r7qENR-KMNqdsNIB8BQQoF6Y0gHwFBCgXpqVLEQgxgePCbmz8JdUDjis4qtEDebiBnbd1YYVmFvE3&_nc_ohc=cMokeng3_tUQ7kNvwHE_pWV&_nc_oc=AdlAVBPMg7n91B96BPaKQXyT2mlOQdbPxeGny1hOhCT5TA5cesifRWsphXCeMhb-wuA&_nc_zt=23&_nc_ht=scontent.fhan3-4.fna&oh=03_Q7cD3AH43VyG13_bu1qcNSUKgNp8q1iFliv4AvTrgbbSybyG0g&oe=68B7C42A' },
     { id: 3, name: 'Trà Quất', price: 10000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524265289_1418211029233447_6094407288034019642_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeExb7j7q8YyGeIkfkgfmd9s4z3kLt6cJCLjPeQu3pwkIrzCSNgfuNss8SYEUCeTsLzA3Ik0tpD_SVNUS6HKl1le&_nc_ohc=OmC_javE0qAQ7kNvwHmIKWQ&_nc_oc=AdmAaGLswnvmwz0t6JpnsRdoSEZHdW61zt-_mE2JyYpbcOj1cAlpYB3vcyDcb-3R8T8&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEB_vKiItPQuCsSML7_tw9vFSyaatsmYTVGAr_-oIRx5A&oe=68B7C9BF' },
     { id: 4, name: 'Cafe Nâu', price: 20000, image: 'https://scontent.fhan3-3.fna.fbcdn.net/v/t1.15752-9/524305030_749540351005311_5762236659003573076_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGP285HNvEwXz6Z66CXmN3AQxKAqcoQUfxDEoCpyhBR_KhOc-_Qg7WG2xvOyzsFxL7MeAtbugVVajGOjiN7Xogy&_nc_ohc=NMqUUx21bnwQ7kNvwGvnU8o&_nc_oc=Adl-SP8Im4GrzcFvVnmet3Kb2E0dsH0AGog2kzJx8G3Gd2rF4UNJwtEMnB00--C04ow&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&oh=03_Q7cD3AFT_L76I2T56JIljK34tpKzdldodEar6OlPS1AI-QSjGQ&oe=68B7E5A4' },
@@ -28,7 +28,6 @@ const customizationOptions = {
 
 let cart = [];
 let currentCustomizingItem = null;
-let modalQuantity = 1;
 
 function renderMenu() {
     const menuDiv = document.getElementById('menu');
@@ -62,45 +61,31 @@ function showCustomizationModal(item) {
     const modal = document.getElementById('customizationModal');
     document.getElementById('customizationItemName').innerText = currentCustomizingItem.name;
     
-    // Reset quantity
-    modalQuantity = 1;
-    document.getElementById('modalQuantity').innerText = modalQuantity;
-    
     const sugarOptionsDiv = document.getElementById('sugarOptions');
+    sugarOptionsDiv.innerHTML = `
+        <p>Đường:</p>
+        ${customizationOptions.sugar.map(level => `
+            <label>
+                <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
+                ${level}%
+            </label>
+        `).join('')}
+    `;
+
     const iceOptionsDiv = document.getElementById('iceOptions');
+    iceOptionsDiv.innerHTML = `
+        <p>Đá:</p>
+        ${customizationOptions.ice.map(level => `
+            <label>
+                <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
+                ${level}%
+            </label>
+        `).join('')}
+    `;
+
     const toppingOptionsDiv = document.getElementById('toppingOptions');
-    const iceSugarOptionsContainer = document.getElementById('iceSugarOptions');
-
-    // Ẩn/hiện tùy chọn đá/đường
-    const itemsWithoutIceSugar = ['Trà Đá', 'Bim Bim', 'Hướng Dương', 'Thăng Long Cứng', 'Cay Cay'];
-    if (itemsWithoutIceSugar.includes(currentCustomizingItem.name)) {
-        iceSugarOptionsContainer.style.display = 'none';
-    } else {
-        iceSugarOptionsContainer.style.display = 'block';
-
-        sugarOptionsDiv.innerHTML = `
-            <p>Đường:</p>
-            ${customizationOptions.sugar.map(level => `
-                <label>
-                    <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
-                    ${level}%
-                </label>
-            `).join('')}
-        `;
-
-        iceOptionsDiv.innerHTML = `
-            <p>Đá:</p>
-            ${customizationOptions.ice.map(level => `
-                <label>
-                    <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
-                    ${level}%
-                </label>
-            `).join('')}
-        `;
-    }
-
     toppingOptionsDiv.innerHTML = '';
-    if (currentCustomizingItem.name === 'Trà Chanh' || currentCustomizingItem.name === 'Trà Quất') {
+    if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
         toppingOptionsDiv.innerHTML = `
             <p>Topping:</p>
             ${customizationOptions.toppings.map(topping => `
@@ -118,84 +103,63 @@ function showCustomizationModal(item) {
 function closeCustomizationModal() {
     document.getElementById('customizationModal').style.display = 'none';
     currentCustomizingItem = null;
-    modalQuantity = 1;
-}
-
-// Cập nhật số lượng trong modal
-function updateModalQuantity(change) {
-    modalQuantity += change;
-    if (modalQuantity < 1) modalQuantity = 1;
-    document.getElementById('modalQuantity').innerText = modalQuantity;
 }
 
 function addToCartFromModal() {
     if (!currentCustomizingItem) return;
     
-    const itemsWithoutIceSugar = ['Trà Đá', 'Bim Bim', 'Hướng Dương', 'Thăng Long Cứng', 'Cay Cay'];
+    const selectedSugar = document.querySelector('input[name="sugar"]:checked').value;
+    const selectedIce = document.querySelector('input[name="ice"]:checked').value;
+    const selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
+        name: cb.value,
+        price: parseInt(cb.dataset.price)
+    }));
 
-    let selectedSugar = '';
-    let selectedIce = '';
-    let selectedToppings = [];
-    let itemPrice = currentCustomizingItem.price;
-
-    if (!itemsWithoutIceSugar.includes(currentCustomizingItem.name)) {
-        selectedSugar = document.querySelector('input[name="sugar"]:checked').value;
-        selectedIce = document.querySelector('input[name="ice"]:checked').value;
-        selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
-            name: cb.value,
-            price: parseInt(cb.dataset.price)
-        }));
-    
-        const toppingPrice = selectedToppings.reduce((total, topping) => total + topping.price, 0);
-        itemPrice += toppingPrice;
-    }
-
-
-    const customizationString = `Đường: ${selectedSugar}%, Đá: ${selectedIce}%${selectedToppings.length > 0 ? `, Topping: ${selectedToppings.map(t => t.name).join(', ')}` : ''}`;
-
-    const itemToAdd = {
-        id: currentCustomizingItem.id,
-        name: currentCustomizingItem.name,
-        quantity: modalQuantity,
-        unitPrice: itemPrice, // Lưu giá gốc của 1 món
-        price: itemPrice * modalQuantity,
-        options: itemsWithoutIceSugar.includes(currentCustomizingItem.name) ? 'Không có tùy chỉnh' : customizationString
+    const toppingPrice = selectedToppings.reduce((total, topping) => total + topping.price, 0);
+    const itemWithCustomization = {
+        ...currentCustomizingItem,
+        quantity: 1,
+        sugar: `${selectedSugar}%`,
+        ice: `${selectedIce}%`,
+        toppings: selectedToppings,
+        price: currentCustomizingItem.price + toppingPrice
     };
 
-    // Kiểm tra xem món đã có trong giỏ chưa
-    const existingItemIndex = cart.findIndex(item => item.id === itemToAdd.id && item.options === itemToAdd.options);
-    if (existingItemIndex !== -1) {
-        // Nếu có, cập nhật số lượng và tổng giá
-        cart[existingItemIndex].quantity += itemToAdd.quantity;
-        cart[existingItemIndex].price += itemToAdd.price;
-    } else {
-        // Nếu chưa, thêm món mới vào giỏ
-        cart.push(itemToAdd);
-    }
-    
+    cart.push(itemWithCustomization);
     renderCart();
     closeCustomizationModal();
 }
 
 function renderCart() {
     const cartDiv = document.getElementById('cart');
+    const emptyCartMessage = document.getElementById('emptyCartMessage');
     cartDiv.innerHTML = '';
     let totalPrice = 0;
 
     if (cart.length === 0) {
-        cartDiv.innerHTML = '<p id="emptyCartMessage">Giỏ hàng của bạn đang trống.</p>';
-        document.getElementById('totalPrice').innerText = '0';
+        if (emptyCartMessage) {
+            emptyCartMessage.style.display = 'block';
+        }
     } else {
+        if (emptyCartMessage) {
+            emptyCartMessage.style.display = 'none';
+        }
         cart.forEach((item, index) => {
-            const itemTotal = item.unitPrice * item.quantity;
+            const itemTotal = item.price * item.quantity;
             totalPrice += itemTotal;
             
+            let customizationString = '';
+            if (item.sugar || item.ice || (item.toppings && item.toppings.length > 0)) {
+                const toppingsNames = item.toppings.map(t => t.name).join(', ');
+                customizationString = ` (${item.sugar} đường, ${item.ice} đá${toppingsNames ? `, Topping: ${toppingsNames}` : ''})`;
+            }
+
             const cartItemHtml = `
                 <div class="cart-item">
                     <div class="order-details">
-                        <span>${item.name} (${item.options})</span>
+                        <span>${item.name}${customizationString}</span>
                         <br>
-                        <span>${item.unitPrice.toLocaleString('vi-VN')} VNĐ x ${item.quantity}</span>
+                        <span>${item.price.toLocaleString('vi-VN')} VNĐ x ${item.quantity}</span>
                     </div>
                     <div class="order-actions">
                         <button class="decrease-quantity-btn" data-index="${index}">-</button>
@@ -207,10 +171,9 @@ function renderCart() {
             `;
             cartDiv.innerHTML += cartItemHtml;
         });
-        document.getElementById('totalPrice').innerText = totalPrice.toLocaleString('vi-VN');
     }
+    document.getElementById('totalPrice').innerText = totalPrice.toLocaleString('vi-VN');
 
-    // Gắn lại sự kiện cho các nút sau khi render
     document.querySelectorAll('.increase-quantity-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const index = parseInt(e.target.dataset.index);
@@ -224,8 +187,6 @@ function renderCart() {
             const index = parseInt(e.target.dataset.index);
             if (cart[index].quantity > 1) {
                 cart[index].quantity--;
-            } else {
-                cart.splice(index, 1);
             }
             renderCart();
         });
@@ -306,7 +267,7 @@ async function submitOrder() {
         status: 'Đang chờ xử lý',
         isPaid: false,
         note: orderNote,
-        createdAt: new Date()
+        createdAt: new Date() // Lưu dưới dạng Timestamp của Firebase
     };
     
     try {
@@ -322,12 +283,6 @@ async function submitOrder() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Lấy giỏ hàng từ localStorage khi tải trang
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-        cart = JSON.parse(savedCart);
-    }
-
     renderMenu();
     renderCart();
 
@@ -340,8 +295,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById('closeCustomizationModal').addEventListener('click', closeCustomizationModal);
     document.getElementById('closeOrderModal').addEventListener('click', closeOrderModal);
-
-    // Gắn sự kiện cho các nút tăng/giảm trong modal
-    document.getElementById('increaseQuantity').addEventListener('click', () => updateModalQuantity(1));
-    document.getElementById('decreaseQuantity').addEventListener('click', () => updateModalQuantity(-1));
 });
