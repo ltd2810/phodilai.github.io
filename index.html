@@ -40,11 +40,10 @@
             background-color: #fefefe;
             padding: 20px;
             border: 1px solid #888;
+            border-radius: 8px;
             width: 80%;
             max-width: 500px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border-radius: 8px;
-            position: relative;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         }
 
         .close-btn {
@@ -60,96 +59,62 @@
             text-decoration: none;
             cursor: pointer;
         }
-        
-        .options-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
+
+        .customization-options, .order-options {
+            margin-top: 20px;
         }
         
-        .options-group button {
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        .options-group button.selected {
-            background-color: #4CAF50;
-            color: white;
-            border-color: #4CAF50;
+        .options-group label {
+            display: block;
+            margin: 5px 0;
         }
 
-        /* Thêm CSS cho nút số lượng */
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .quantity-control button {
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            padding: 5px 10px;
-            border-radius: 5px;
+        .order-buttons button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
             cursor: pointer;
         }
-        .quantity-control span {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .order-options label, .order-options input {
-            display: block;
+        
+        .order-options input, .order-options textarea {
+            width: 100%;
+            padding: 8px;
             margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Phố Đi Lại Lý Nhân</h1>
-            <p>Đường Lý Nhân, Vĩnh Tường, Vĩnh Phúc</p>
-        </header>
-
-        <section id="menu">
-            </section>
-        
-        <div id="cart">
-            <h2>Giỏ Hàng</h2>
-            <div id="cartItems"></div>
-            <p>Tổng cộng: <span id="totalPrice">0 VNĐ</span></p>
-            <div class="order-info">
-                <button id="clearCartBtn">Xóa giỏ hàng</button>
-            </div>
+        <h1>PHỐ ĐI LẠI LÝ NHÂN</h1>
+        <div id="menu" class="menu-container">
+            <!-- Menu items will be rendered here by JavaScript -->
         </div>
 
-        <div class="order-info">
+        <h1>Giỏ Hàng</h1>
+        <div id="cart">
+            <!-- Cart items will be rendered here by JavaScript -->
+        </div>
+        <p>Tổng tiền: <span id="totalPrice">0</span> VNĐ</p>
+
+        <div class="order-buttons">
             <button id="dineInBtn">Uống Tại Chỗ</button>
             <button id="deliveryBtn">Đặt Giao Hàng</button>
         </div>
     </div>
 
+    <!-- Hộp thoại tùy chỉnh (Customization Modal) -->
     <div id="customizationModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeCustomizationModal">&times;</span>
             <h3 id="customizationItemName"></h3>
             <div class="customization-options">
-                <div class="quantity-control">
-                    <h4>Số lượng: </h4>
-                    <button id="decreaseQuantity">-</button>
-                    <span id="modalQuantity">1</span>
-                    <button id="increaseQuantity">+</button>
-                </div>
-                
-                <div id="iceSugarOptions">
-                    <h4>Đường</h4>
-                    <div id="sugarOptions" class="options-group"></div>
-                    <h4>Đá</h4>
-                    <div id="iceOptions" class="options-group"></div>
-                </div>
-
+                <h4>Đường</h4>
+                <div id="sugarOptions" class="options-group"></div>
+                <h4>Đá</h4>
+                <div id="iceOptions" class="options-group"></div>
                 <h4>Topping</h4>
                 <div id="toppingOptions" class="options-group"></div>
             </div>
@@ -157,16 +122,19 @@
         </div>
     </div>
 
+    <!-- Hộp thoại đặt hàng (Order Modal) -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeOrderModal">&times;</span>
             <h3 id="orderModalTitle"></h3>
             <div id="orderOptions" class="order-options">
-                </div>
+                <!-- Nội dung sẽ được render bằng JavaScript -->
+            </div>
             <button id="submitOrderBtn">Gửi Đơn Hàng</button>
         </div>
     </div>
     
+    <script type="module" src="firebase-config.js"></script>
     <script type="module" src="script-client.js"></script>
 </body>
 </html>
