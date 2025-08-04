@@ -108,13 +108,6 @@ function showCustomizationModal(item) {
         }
     }
     
-    const quantityOptionsDiv = document.getElementById('quantityOptions');
-    if (quantityOptionsDiv) {
-        quantityOptionsDiv.innerHTML = `
-            <input type="number" id="itemQuantity" name="itemQuantity" value="1" min="1">
-        `;
-    }
-    
     modal.style.display = 'flex';
 }
 
@@ -289,94 +282,4 @@ async function submitOrder() {
     
     const orderType = submitBtn.dataset.orderType;
     let customerInfo = {};
-    const orderNoteEl = document.getElementById('orderNote');
-    const orderNote = orderNoteEl ? orderNoteEl.value : '';
-
-    if (orderType === 'dine-in') {
-        const tableNumberEl = document.getElementById('tableNumber');
-        const tableNumber = tableNumberEl ? tableNumberEl.value : '';
-        if (!tableNumber) {
-            alert("Vui lòng nhập số bàn!");
-            return;
-        }
-        customerInfo = { type: 'Uống tại chỗ', tableNumber };
-    } else if (orderType === 'delivery') {
-        const customerNameEl = document.getElementById('customerName');
-        const phoneEl = document.getElementById('phone');
-        const addressEl = document.getElementById('address');
-        const customerName = customerNameEl ? customerNameEl.value : '';
-        const phone = phoneEl ? phoneEl.value : '';
-        const address = addressEl ? addressEl.value : '';
-        
-        if (!customerName || !phone || !address) {
-            alert("Vui lòng điền đầy đủ thông tin giao hàng!");
-            return;
-        }
-        customerInfo = { type: 'Giao hàng', customerName, phone, address };
-    } else {
-        alert("Có lỗi xảy ra, vui lòng thử lại!");
-        return;
-    }
-
-    const totalPriceSpan = document.getElementById('totalPrice');
-    if (!totalPriceSpan) {
-        alert("Không tìm thấy tổng tiền, vui lòng tải lại trang!");
-        return;
-    }
-
-    const newOrder = {
-        items: cart,
-        customerInfo: customerInfo,
-        totalPrice: parseFloat(totalPriceSpan.innerText.replace(/[^0-9]/g, '')),
-        status: 'Đang chờ xử lý',
-        isPaid: false,
-        note: orderNote,
-        createdAt: new Date()
-    };
-    
-    try {
-        await addDoc(collection(db, "orders"), newOrder);
-        alert("Đơn hàng của bạn đã được gửi thành công!");
-        cart = [];
-        renderCart();
-        closeOrderModal();
-    } catch (e) {
-        console.error("Lỗi khi thêm đơn hàng: ", e);
-        alert("Có lỗi xảy ra khi gửi đơn hàng!");
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    renderMenu();
-    renderCart();
-
-    const dineInBtn = document.getElementById('dineInBtn');
-    if (dineInBtn) {
-        dineInBtn.addEventListener('click', () => showOrderModal('dine-in'));
-    }
-
-    const deliveryBtn = document.getElementById('deliveryBtn');
-    if (deliveryBtn) {
-        deliveryBtn.addEventListener('click', () => showOrderModal('delivery'));
-    }
-
-    const submitOrderBtn = document.getElementById('submitOrderBtn');
-    if (submitOrderBtn) {
-        submitOrderBtn.addEventListener('click', submitOrder);
-    }
-    
-    const addToCartModalBtn = document.getElementById('addToCartModalBtn');
-    if (addToCartModalBtn) {
-        addToCartModalBtn.addEventListener('click', addToCartFromModal);
-    }
-    
-    const closeCustomizationModalBtn = document.getElementById('closeCustomizationModal');
-    if (closeCustomizationModalBtn) {
-        closeCustomizationModalBtn.addEventListener('click', closeCustomizationModal);
-    }
-
-    const closeOrderModalBtn = document.getElementById('closeOrderModal');
-    if (closeOrderModalBtn) {
-        closeOrderModalBtn.addEventListener('click', closeOrderModal);
-    }
-});
+    const orderNoteEl
