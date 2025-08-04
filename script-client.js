@@ -12,7 +12,7 @@ const menuItems = [
     { id: 8, name: 'Sữa Chua Lắc', price: 25000, image: 'https://scontent.fhan4-1.fna.fbcdn.net/v/t1.15752-9/526441291_1269879847333066_3500046320414158270_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFyarHVjF3QnxKMb4YYwWz9F7FpOKRIH6oXsWk4pEgfqmFYv12w5gK5p9AIGLgx8QgkPg_-b0w_sdYrEQVdMw-B&_nc_ohc=5-B93Gxy0-EQ7kNvwGHfjj2&_nc_oc=Adm-4fOjPVX1QKYdRcV7_RCYCYSpIGbvEpQ_znV51k6PN9aFG_YBt2th064-0YPQAr4&_nc_zt=23&_nc_ht=scontent.fhan4-1.fna&oh=03_Q7cD3AFvXazCDxpd05IoGzWSMFeJVjzWMZNEweosl8D-vQeANQ&oe=68B7F3A9' },
     { id: 9, name: 'SC Lắc Dâu', price: 30000, image: 'https://scontent.fhan3-3.fna.fbcdn.net/v/t1.15752-9/526149395_2153801508467855_2307181939167630771_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE-gTrGzT9cmrciA4h22iJqcAlpSjQIa5dwCWlKNAhrl5WkzMAcZdJiDR-MA6CzY8oXXlNVuQwWK9ubGPGNf5o6&_nc_ohc=dv8zo7axIxYQ7kNvwEjrO1m&_nc_oc=AdllFenUYhdF6e_5nBlcMssAlFeCLokRcqu3IF4CQi8Sn1ndbPDiVlToLsYcEcY7O7w&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&oh=03_Q7cD3AGrPA15Ejy3ZArmQ3KQPugODcHDJ3vrwnSP3vnDwDBdjg&oe=68B7CC92' },
     { id: 10, name: 'SC Lắc Việt Quất', price: 30000, image: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.15752-9/525416436_1665455384143810_832299445849766471_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEiSK4_5ZzuCmS8D8bfflrlMe6RtTQ623Ux7pG1NDrbdRg9YANNAfrz_JSh_p2RL89NGl1VFIRA2XBeHCTvB-23&_nc_ohc=1cc_7dVXIMQQ7kNvwHwZmZ4&_nc_oc=AdlMVtlsESWWmCt3IY3GuOCZz-IhQs_DY3JniLzbhyhM0MFCgsogvMPP7rFy7GhPkpA&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&oh=03_Q7cD3AHDlBQ7uaCxAju3nDTXWt7fLFyFoDY1jAg-Dh5wTxndAw&oe=68B7C4B9' },
-    { id: 11, name: 'Bim Bim', price: 6000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524654314_1855264411999774_734793370755222912_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHycIby3yHpZwC1ev7S6XtT0515WdA5WfbTnXlZ0DlZ9mwbH-ZA4qGcmyT4UxtpZ6K8eIdVCcgmfq84MRvnub67&_nc_ohc=IzVMClZJ99cQ7kNvwFLeYLP&_nc_oc=Adnp6CU4pnefUdWqB18-0ViPPWKQaRcz9CEgoAmairJNAWFsW37-61Dsvw6Icfwlc&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AE6Gm5_ECBuQQQmvni5sP9gr4o-2O2fVzKasuFUYLWijQ&oe=68B7CBCD' },
+    { id: 11, name: 'Bim Bim', price: 6000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524654314_1855264411999774_734793370755222912_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHycIby3yHpZwC1ev7S6XtT0515WdA5WfbTnXlZ0DlZ9mwbH-ZA4qGcmyT4UxtpZ6K8eIdVCcgmfq84MRvnub67&_nc_ohc=IzVMClZJ99cQ7kNvwFLeYLP&_nc_oc=Adnp6CU4pnefUdWqB18-0ViPPWKQaRcz9CEgoAmairJNAWFsW37-61Dsvlww6Icfwlc&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AE6Gm5_ECBuQQQmvni5sP9gr4o-2O2fVzKasuFUYLWijQ&oe=68B7CBCD' },
     { id: 12, name: 'Hướng Dương', price: 10000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/527231823_1330496755315334_823293477744792975_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGeTt6nz7F4x12G5Ojg1v0tSM3XShVapZBIzddKFVqlkAJHhNymSVRHbq0we9Z6QA3JFHB_aGCEwp8VH-D9wOc3&_nc_ohc=YAkstTobzxgQ7kNvwHhsam9&_nc_oc=Adl4aSopIwhLLiwzhoytB_HIG2cgMTMwnWkjo_Mas0cEghCnlbDrpT7Qy9VYGaWbsec&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEKJy4RVDwl_cx_6oS4dVYI7ibXxF4ygd8-yGED2bRkww&oe=68B7EAD1' },
     { id: 13, name: 'Thăng Long Cứng', price: 15000, image: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.15752-9/524655567_762633793162981_6459701164747945606_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEcNByng6NdTKccV05_kI8yqHKQorSebNCocpCitJ5s0O_yVn3xYuAoQY_dHuSVj4tig4t93xDF3_-uLqg8RUyy&_nc_ohc=2rAo6845W-EQ7kNvwHqDqk_&_nc_oc=AdlLigFFcdKwVsGV_VV6VubPOxTwkKdKE6uF0uCS0OrTdaINLWVjd_mDoYoiMtlLwak&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&oh=03_Q7cD3AFLdnqYJCKFb1PiRKB57Uot2VFQ7eZAvYEuYH_GJKSmdA&oe=68B7E56E' },
     { id: 14, name: 'Cay Cay', price: 2000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524132981_1489744015716698_6781836828722093721_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeF7vfKvkHfK1bf6dVmf151lNQrvlhQa9YU1Cu-WFBr1hfTCrd46rbXFqT7TJ44VO8We8fk2gftcO3ZCV5jApdlP&_nc_ohc=H7CBZrURYxgQ7kNvwEtMQoh&_nc_oc=Adm0rrLEp8NWIkbZKOE_B4G3F5cdEYv7giZJR-DRWY7FSNP-tdDZCyOqY6mmYcL9NdU&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AHaJq_GK8osdhj1JDWGmJApcdJO3j7nQDzO4jDPpT5qlA&oe=68B7E877' }
@@ -31,85 +31,86 @@ let currentCustomizingItem = null;
 
 function renderMenu() {
     const menuDiv = document.getElementById('menu');
-    if (menuDiv) {
-        menuDiv.innerHTML = '';
-        menuItems.forEach(item => {
-            const itemHtml = `
-                <div class="menu-item">
-                    <img src="${item.image}" alt="${item.name}">
-                    <h3>${item.name}</h3>
-                    <p>${item.price.toLocaleString('vi-VN')} VNĐ</p>
-                    <button class="customize-btn" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Thêm vào giỏ</button>
-                </div>
-            `;
-            menuDiv.innerHTML += itemHtml;
+    if (!menuDiv) return;
+    
+    menuDiv.innerHTML = '';
+    menuItems.forEach(item => {
+        const itemHtml = `
+            <div class="menu-item">
+                <img src="${item.image}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p>${item.price.toLocaleString('vi-VN')} VNĐ</p>
+                <button class="customize-btn" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Thêm vào giỏ</button>
+            </div>
+        `;
+        menuDiv.innerHTML += itemHtml;
+    });
+
+    document.querySelectorAll('.customize-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const item = {
+                id: parseInt(e.target.dataset.id),
+                name: e.target.dataset.name,
+                price: parseFloat(e.target.dataset.price),
+                image: e.target.dataset.image
+            };
+            showCustomizationModal(item);
         });
-        document.querySelectorAll('.customize-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const item = {
-                    id: parseInt(e.target.dataset.id),
-                    name: e.target.dataset.name,
-                    price: parseFloat(e.target.dataset.price),
-                    image: e.target.dataset.image
-                };
-                showCustomizationModal(item);
-            });
-        });
-    }
+    });
 }
 
 function showCustomizationModal(item) {
     currentCustomizingItem = item;
     const modal = document.getElementById('customizationModal');
-    if (modal) {
-        const customizationItemName = document.getElementById('customizationItemName');
-        if (customizationItemName) {
-            customizationItemName.innerText = currentCustomizingItem.name;
-        }
-        
-        const sugarOptionsDiv = document.getElementById('sugarOptions');
-        if (sugarOptionsDiv) {
-            sugarOptionsDiv.innerHTML = `
-                <p>Đường:</p>
-                ${customizationOptions.sugar.map(level => `
-                    <label>
-                        <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
-                        ${level}%
-                    </label>
-                `).join('')}
-            `;
-        }
-
-        const iceOptionsDiv = document.getElementById('iceOptions');
-        if (iceOptionsDiv) {
-            iceOptionsDiv.innerHTML = `
-                <p>Đá:</p>
-                ${customizationOptions.ice.map(level => `
-                    <label>
-                        <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
-                        ${level}%
-                    </label>
-                `).join('')}
-            `;
-        }
-
-        const toppingOptionsDiv = document.getElementById('toppingOptions');
-        if (toppingOptionsDiv) {
-            toppingOptionsDiv.innerHTML = '';
-            if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
-                toppingOptionsDiv.innerHTML = `
-                    <p>Topping:</p>
-                    ${customizationOptions.toppings.map(topping => `
-                        <label>
-                            <input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}">
-                            ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)
-                        </label>
-                    `).join('')}
-                `;
-            }
-        }
-        modal.style.display = 'flex';
+    if (!modal) return;
+    
+    const customizationItemName = document.getElementById('customizationItemName');
+    if (customizationItemName) {
+        customizationItemName.innerText = currentCustomizingItem.name;
     }
+    
+    const sugarOptionsDiv = document.getElementById('sugarOptions');
+    if (sugarOptionsDiv) {
+        sugarOptionsDiv.innerHTML = `
+            <p>Đường:</p>
+            ${customizationOptions.sugar.map(level => `
+                <label>
+                    <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
+                    ${level}%
+                </label>
+            `).join('')}
+        `;
+    }
+
+    const iceOptionsDiv = document.getElementById('iceOptions');
+    if (iceOptionsDiv) {
+        iceOptionsDiv.innerHTML = `
+            <p>Đá:</p>
+            ${customizationOptions.ice.map(level => `
+                <label>
+                    <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
+                    ${level}%
+                </label>
+            `).join('')}
+        `;
+    }
+
+    const toppingOptionsDiv = document.getElementById('toppingOptions');
+    if (toppingOptionsDiv) {
+        toppingOptionsDiv.innerHTML = '';
+        if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
+            toppingOptionsDiv.innerHTML = `
+                <p>Topping:</p>
+                ${customizationOptions.toppings.map(topping => `
+                    <label>
+                        <input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}">
+                        ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)
+                    </label>
+                `).join('')}
+            `;
+        }
+    }
+    modal.style.display = 'flex';
 }
 
 function closeCustomizationModal() {
@@ -123,13 +124,16 @@ function closeCustomizationModal() {
 function addToCartFromModal() {
     if (!currentCustomizingItem) return;
     
-    const selectedSugar = document.querySelector('input[name="sugar"]:checked');
-    const selectedIce = document.querySelector('input[name="ice"]:checked');
-
-    if (!selectedSugar || !selectedIce) {
+    const selectedSugarInput = document.querySelector('input[name="sugar"]:checked');
+    const selectedIceInput = document.querySelector('input[name="ice"]:checked');
+    
+    if (!selectedSugarInput || !selectedIceInput) {
         alert("Vui lòng chọn mức đường và đá!");
         return;
     }
+
+    const selectedSugar = selectedSugarInput.value;
+    const selectedIce = selectedIceInput.value;
 
     const selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
         name: cb.value,
@@ -140,8 +144,8 @@ function addToCartFromModal() {
     const itemWithCustomization = {
         ...currentCustomizingItem,
         quantity: 1,
-        sugar: `${selectedSugar.value}%`,
-        ice: `${selectedIce.value}%`,
+        sugar: `${selectedSugar}%`,
+        ice: `${selectedIce}%`,
         toppings: selectedToppings,
         price: currentCustomizingItem.price + toppingPrice
     };
@@ -155,9 +159,13 @@ function renderCart() {
     const cartDiv = document.getElementById('cart');
     const emptyCartMessage = document.getElementById('emptyCartMessage');
     const totalPriceSpan = document.getElementById('totalPrice');
-    
-    if (!cartDiv || !totalPriceSpan) return;
 
+    if (!cartDiv || !totalPriceSpan) {
+        console.error("Không tìm thấy các phần tử giỏ hàng cần thiết.");
+        return;
+    }
+
+    // Xóa nội dung cũ
     cartDiv.innerHTML = '';
     let totalPrice = 0;
 
@@ -184,7 +192,7 @@ function renderCart() {
                     <div class="order-details">
                         <span>${item.name}${customizationString}</span>
                         <br>
-                        <span>${item.price.toLocaleString('vi-VN')} VNĐ x ${item.quantity}</span>
+                        <span>${item.price.toLocaleString('vi-VN')} VNĐ</span>
                     </div>
                     <div class="order-actions">
                         <button class="decrease-quantity-btn" data-index="${index}">-</button>
@@ -197,8 +205,10 @@ function renderCart() {
             cartDiv.innerHTML += cartItemHtml;
         });
     }
+
     totalPriceSpan.innerText = totalPrice.toLocaleString('vi-VN');
 
+    // Thêm event listeners sau khi các nút đã được render
     document.querySelectorAll('.increase-quantity-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const index = parseInt(e.target.dataset.index);
@@ -355,9 +365,9 @@ document.addEventListener('DOMContentLoaded', () => {
         addToCartModalBtn.addEventListener('click', addToCartFromModal);
     }
     
-    const closeCustomizationModal = document.getElementById('closeCustomizationModal');
-    if (closeCustomizationModal) {
-        closeCustomizationModal.addEventListener('click', closeCustomizationModal);
+    const closeCustomizationModalBtn = document.getElementById('closeCustomizationModal');
+    if (closeCustomizationModalBtn) {
+        closeCustomizationModalBtn.addEventListener('click', closeCustomizationModal);
     }
 
     const closeOrderModalBtn = document.getElementById('closeOrderModal');
