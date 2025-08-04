@@ -15,7 +15,7 @@ const menuItems = [
     { id: 11, name: 'Bim Bim', price: 6000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524654314_1855264411999774_734793370755222912_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHycIby3yHpZwC1ev7S6XtT0515WdA5WfbTnXlZ0DlZ9mwbH-ZA4qGcmyT4UxtpZ6K8eIdVCcgmfq84MRvnub67&_nc_ohc=IzVMClZJ99cQ7kNvwFLeYLP&_nc_oc=Adnp6CU4pnefUdWqB18-0ViPPWKQaRcz9CEgoAmairJNAWFsW37-61Dsvw6Icfwlc&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AE6Gm5_ECBuQQQmvni5sP9gr4o-2O2fVzKasuFUYLWijQ&oe=68B7CBCD' },
     { id: 12, name: 'Hướng Dương', price: 10000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/527231823_1330496755315334_823293477744792975_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGeTt6nz7F4x12G5Ojg1v0tSM3XShVapZBIzddKFVqlkAJHhNymSVRHbq0we9Z6QA3JFHB_aGCEwp8VH-D9wOc3&_nc_ohc=YAkstTobzxgQ7kNvwHhsam9&_nc_oc=Adl4aSopIwhLLiwzhoytB_HIG2cgMTMwnWkjo_Mas0cEghCnlbDrpT7Qy9VYGaWbsec&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEKJy4RVDwl_cx_6oS4dVYI7ibXxF4ygd8-yGED2bRkww&oe=68B7EAD1' },
     { id: 13, name: 'Thăng Long Cứng', price: 15000, image: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.15752-9/524655567_762633793162981_6459701164747945606_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEcNByng6NdTKccV05_kI8yqHKQorSebNCocpCitJ5s0O_yVn3xYuAoQY_dHuSVj4tig4t93xDF3_-uLqg8RUyy&_nc_ohc=2rAo6845W-EQ7kNvwHqDqk_&_nc_oc=AdlLigFFcdKwVsGV_VV6VubPOxTwkKdKE6uF0uCS0OrTdaINLWVjd_mDoYoiMtlLwak&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&oh=03_Q7cD3AFLdnqYJCKFb1PiRKB57Uot2VFQ7eZAvYEuYH_GJKSmdA&oe=68B7E56E' },
-    { id: 14, name: 'Cay Cay', price: 2000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524132981_1489744015716698_6781836828722093721_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeF7vfKvkHfK1bf6dVmf151lNQrvlhQa9YU1Cu-WFBr1hfTCrd46rbXFqT7TJ44VO8We8fk2gftcO3ZCV5jApdlP&_nc_ohc=H7CBZrURYxgQ7kNvwEtMQoh&_nc_oc=Adm0rrLEp8NWIkbZKOE_B4G3F5cdEYv7giZJR-DRWY7FSNP-tdDZCyOqY6mmYcL9NdU&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AHaJq_GK8osdhj1JDWGmJApcdJO3j7nQDzO4jDPpT5qlA&oe=68B7E877' }
+    { id: 14, name: 'Cay Cay', price: 2000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524132981_1489744015716698_6781836828722093721_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeF7vfKvkHfK1bf6dVmf151lNQrvlhQa9YU1Cu-WFBr1hfTCrd46rbXFqT7TJ44VO8fk2gftcO3ZCV5jApdlP&_nc_ohc=H7CBZrURYxgQ7kNvwEtMQoh&_nc_oc=Adm0rrLEp8NWIkbZKOE_B4G3F5cdEYv7giZJR-DRWY7FSNP-tdDZCyOqY6mmYcL9NdU&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AHaJq_GK8osdhj1JDWGmJApcdJO3j7nQDzO4jDPpT5qlA&oe=68B7E877' }
 ];
 
 const customizationOptions = {
@@ -72,7 +72,6 @@ function showCustomizationModal(item) {
     const sugarOptionsDiv = document.getElementById('sugarOptions');
     if (sugarOptionsDiv) {
         sugarOptionsDiv.innerHTML = `
-            <p>Đường:</p>
             ${customizationOptions.sugar.map(level => `
                 <label>
                     <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
@@ -85,7 +84,6 @@ function showCustomizationModal(item) {
     const iceOptionsDiv = document.getElementById('iceOptions');
     if (iceOptionsDiv) {
         iceOptionsDiv.innerHTML = `
-            <p>Đá:</p>
             ${customizationOptions.ice.map(level => `
                 <label>
                     <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
@@ -100,7 +98,6 @@ function showCustomizationModal(item) {
         toppingOptionsDiv.innerHTML = '';
         if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
             toppingOptionsDiv.innerHTML = `
-                <p>Topping:</p>
                 ${customizationOptions.toppings.map(topping => `
                     <label>
                         <input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}">
@@ -111,11 +108,9 @@ function showCustomizationModal(item) {
         }
     }
     
-    // Thêm phần chọn số lượng vào modal
     const quantityOptionsDiv = document.getElementById('quantityOptions');
     if (quantityOptionsDiv) {
         quantityOptionsDiv.innerHTML = `
-            <p>Số lượng:</p>
             <input type="number" id="itemQuantity" name="itemQuantity" value="1" min="1">
         `;
     }
