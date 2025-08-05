@@ -76,7 +76,7 @@
             cursor: pointer;
         }
         
-        .order-options input, .order-options textarea {
+        .order-options input, .order-options textarea, .order-options select {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -130,23 +130,7 @@
             <span class="close-btn" id="closeOrderModal">&times;</span>
             <h3 id="orderModalTitle"></h3>
             <div id="orderOptions" class="order-options">
-                <div class="options-group">
-                    <label for="customerName">Tên của bạn:</label>
-                    <input type="text" id="customerName" placeholder="Nhập tên của bạn">
                 </div>
-                <div class="options-group">
-                    <label for="tableNumber">Số bàn:</label>
-                    <input type="text" id="tableNumber" placeholder="Nhập số bàn của bạn">
-                </div>
-                <div class="options-group">
-                    <label for="customerPhone">Số điện thoại:</label>
-                    <input type="tel" id="customerPhone" placeholder="Nhập số điện thoại của bạn">
-                </div>
-                <div class="options-group" id="addressGroup" style="display: none;">
-                    <label for="deliveryAddress">Địa chỉ:</label>
-                    <textarea id="deliveryAddress" placeholder="Nhập địa chỉ của bạn"></textarea>
-                </div>
-            </div>
             <button id="submitOrderBtn">Gửi Đơn Hàng</button>
         </div>
     </div>
