@@ -2,20 +2,20 @@ import { db } from './firebase-config.js';
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const menuItems = [
-    { id: 1, name: 'Trà Đá', price: 5000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/528467272_1088978119425078_2155584391935203864_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE8KngH6lQGpCaJPqs1qYepMyAC2J3e4DwzIALYnd7gPPeFYU3bIXha77SWzRvR9Zfq4X6PVEnoZsAe68Y78RQN&_nc_ohc=N_OgxAkk42oQ7kNvwHbPqIm&_nc_oc=AdkPGcUanFFqRnhWJFp6pqjFCoEDTQ_8dCq1vs9e0Zgyr_HC5AWe6fJNyAUGi1a-5Bs&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEfxzLheoCdwR9p7XPGTDnQsL1StTCc0EPXhXRainL3Zw&oe=68B7DD19' },
-    { id: 2, name: 'Trà Chanh', price: 10000, image: 'https://scontent.fhan3-4.fna.fbcdn.net/v/t1.15752-9/524128035_1024804109561671_3486439221231126237_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEsWJNZoX5r7qENR-KMNqdsNIB8BQQoF6Y0gHwFBCgXpqVLEQgxgePCbmz8JdUDjis4qtEDebiBnbd1YYVmFvE3&_nc_ohc=cMokeng3_tUQ7kNvwHE_pWV&_nc_oc=AdlAVBPMg7n91B96BPaKQXyT2mlOQdbPxeGny1hOhCT5TA5cesifRWsphXCeMhb-wuA&_nc_zt=23&_nc_ht=scontent.fhan3-4.fna&oh=03_Q7cD3AH43VyG13_bu1qcNSUKgNp8q1iFliv4AvTrgbbSybyG0g&oe=68B7C42A' },
-    { id: 3, name: 'Trà Quất', price: 10000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524265289_1418211029233447_6094407288034019642_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeExb7j7q8YyGeIkfkgfmd9s4z3kLt6cJCLjPeQu3pwkIrzCSNgfuNss8SYEUCeTsLzA3Ik0tpD_SVNUS6HKl1le&_nc_ohc=OmC_javE0qAQ7kNvwHmIKWQ&_nc_oc=AdmAaGLswnvmwz0t6JpnsRdoSEZHdW61zt-_mE2JyYpbcOj1cAlpYB3vcyDcb-3R8T8&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEB_vKiItPQuCsSML7_tw9vFSyaatsmYTVGAr_-oIRx5A&oe=68B7C9BF' },
-    { id: 4, name: 'Cafe Nâu', price: 20000, image: 'https://scontent.fhan3-3.fna.fbcdn.net/v/t1.15752-9/524305030_749540351005311_5762236659003573076_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGP285HNvEwXz6Z66CXmN3AQxKAqcoQUfxDEoCpyhBR_KhOc-_Qg7WG2xvOyzsFxL7MeAtbugVVajGOjiN7Xogy&_nc_ohc=NMqUUx21bnwQ7kNvwGvnU8o&_nc_oc=Adl-SP8Im4GrzcFvVnmet3Kb2E0dsH0AGog2kzJx8G3Gd2rF4UNJwtEMnB00--C04ow&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&oh=03_Q7cD3AFT_L76I2T56JIljK34tpKzdldodEar6OlPS1AI-QSjGQ&oe=68B7E5A4' },
-    { id: 5, name: 'Cafe Đen', price: 20000, image: 'https://scontent.fhan4-4.fna.fbcdn.net/v/t1.15752-9/524696028_756438240304371_4802309054759004427_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeH9-1JumYAsKDP2yLHuyzTSkdmwVwrxN_GR2bBXCvE38aNiSvp-zqhmNG_JcNSZXg8zRjlPzANNmXuiHUBynmTQ&_nc_ohc=Orni7tR5jpIQ7kNvwHtnlvn&_nc_oc=Adn-Tf_xbSltep3JxHwiTb_9DqxvYLTWatbtglKe4xLxBJyG0fCTQqsUzHNK1iey6dU&_nc_zt=23&_nc_ht=scontent.fhan4-4.fna&oh=03_Q7cD3AE2StRUo0s4sncQjnNy0LWDW2uGvRcbpcxMVY4NddnmaA&oe=68B7C6E6' },
-    { id: 6, name: 'Bạc Xỉu', price: 25000, image: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.15752-9/525252571_1830106864204410_5423043039532890250_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHnjBkIBA_3UdRC1jDny04fCxvZVSxBV8ULG9lVLEFXxYRyzDZWE7nYDDHqvBdY8aGmijtG6aHVz04ZlvhmIYGZ&_nc_ohc=DDagvseztFsQ7kNvwHGiVup&_nc_oc=AdnD_DqkO6qaD5XGOftjim1CPB5UdElnNh4Tni8LaXaR1-KuFIBpbMB-sCxsntmLKCM&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&oh=03_Q7cD3AFc9vADx-fyXsnap2Oa-0_xdQZvcPJd80ZiOVpArO9pQyg&oe=68B7F5FB' },
-    { id: 7, name: 'Cafe Muối', price: 25000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/527701742_1652329582131347_4912877306807824192_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEi8I7vQX2E0wVVrwdZ3JsgrtWERo24LB2u1YRGjbgsHYLYJedcn6Obo6maELAgehhm59EP2Rkw1EwPg9rwrjqv&_nc_ohc=ZpukEEkKcwcQ7kNvwH99AgH&_nc_oc=Admq8nBZ6lLXCF2H8iVj8-zz42ArTq3YYskbgQ60LLIT1fQHK_IenQLoz6jiR1pzZnE&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AFWhNNMxj6VhWUwlS5J415p7hL7ElnDI0gmMb9gLOdLbA&oe=68B7D5FE' },
-    { id: 8, name: 'Sữa Chua Lắc', price: 25000, image: 'https://scontent.fhan4-1.fna.fbcdn.net/v/t1.15752-9/526441291_1269879847333066_3500046320414158270_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFyarHVjF3QnxKMb4YYwWz9F7FpOKRIH6oXsWk4pEgfqmFYv12w5gK5p9AIGLgx8QgkPg_-b0w_sdYrEQVdMw-B&_nc_ohc=5-B93Gxy0-EQ7kNvwGHfjj2&_nc_oc=Adm-4fOjPVX1QKYdRcV7_RCYCYSpIGbvEpQ_znV51k6PN9aFG_YBt2th064-0YPQAr4&_nc_zt=23&_nc_ht=scontent.fhan4-1.fna&oh=03_Q7cD3AFvXazCDxpd05IoGzWSMFeJVjzWMZNEweosl8D-vQeANQ&oe=68B7F3A9' },
-    { id: 9, name: 'SC Lắc Dâu', price: 30000, image: 'https://scontent.fhan3-3.fna.fbcdn.net/v/t1.15752-9/526149395_2153801508467855_2307181939167630771_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE-gTrGzT9cmrciA4h22iJqcAlpSjQIa5dwCWlKNAhrl5WkzMAcZdJiDR-MA6CzY8oXXlNVuQwWK9ubGPGNf5o6&_nc_ohc=dv8zo7axIxYQ7kNvwEjrO1m&_nc_oc=AdllFenUYhdF6e_5nBlcMssAlFeCLokRcqu3IF4CQi8Sn1ndbPDiVlToLsYcEcY7O7w&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&oh=03_Q7cD3AGrPA15Ejy3ZArmQ3KQPugODcHDJ3vrwnSP3vnDwDBdjg&oe=68B7CC92' },
-    { id: 10, name: 'SC Lắc Việt Quất', price: 30000, image: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.15752-9/525416436_1665455384143810_832299445849766471_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEiSK4_5ZzuCmS8D8bfflrlMe6RtTQ623Ux7pG1NDrbdRg9YANNAfrz_JSh_p2RL89NGl1VFIRA2XBeHCTvB-23&_nc_ohc=1cc_7dVXIMQQ7kNvwHwZmZ4&_nc_oc=AdlMVtlsESWWmCt3IY3GuOCZz-IhQs_DY3JniLzbhyhM0MFCgsogvMPP7rFy7GhPkpA&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&oh=03_Q7cD3AHDlBQ7uaCxAju3nDTXWt7fLFyFoDY1jAg-Dh5wTxndAw&oe=68B7C4B9' },
-    { id: 11, name: 'Bim Bim', price: 6000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524654314_1855264411999774_734793370755222912_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHycIby3yHpZwC1ev7S6XtT0515WdA5WfbTnXlZ0DlZ9mwbH-ZA4qGcmyT4UxtpZ6K8eIdVCcgmfq84MRvnub67&_nc_ohc=IzVMClZJ99cQ7kNvwFLeYLP&_nc_oc=Adnp6CU4pnefUdWqB18-0ViPPWKQaRcz9CEgoAmairJNAWFsW37-61Dsvw6Icfwlc&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AE6Gm5_ECBuQQQmvni5sP9gr4o-2O2fVzKasuFUYLWijQ&oe=68B7CBCD' },
-    { id: 12, name: 'Hướng Dương', price: 10000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/527231823_1330496755315334_823293477744792975_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGeTt6nz7F4x12G5Ojg1v0tSM3XShVapZBIzddKFVqlkAJHhNymSVRHbq0we9Z6QA3JFHB_aGCEwp8VH-D9wOc3&_nc_ohc=YAkstTobzxgQ7kNvwHhsam9&_nc_oc=Adl4aSopIwhLLiwzhoytB_HIG2cgMTMwnWkjo_Mas0cEghCnlbDrpT7Qy9VYGaWbsec&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEKJy4RVDwl_cx_6oS4dVYI7ibXxF4ygd8-yGED2bRkww&oe=68B7EAD1' },
-    { id: 13, name: 'Thăng Long Cứng', price: 15000, image: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.15752-9/524655567_762633793162981_6459701164747945606_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEcNByng6NdTKccV05_kI8yqHKQorSebNCocpCitJ5s0O_yVn3xYuAoQY_dHuSVj4tig4t93xDF3_-uLqg8RUyy&_nc_ohc=2rAo6845W-EQ7kNvwHqDqk_&_nc_oc=AdlLigFFcdKwVsGV_VV6VubPOxTwkKdKE6uF0uCS0OrTdaINLWVjd_mDoYoiMtlLwak&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&oh=03_Q7cD3AFLdnqYJCKFb1PiRKB57Uot2VFQ7eZAvYEuYH_GJKSmdA&oe=68B7E56E' },
-    { id: 14, name: 'Cay Cay', price: 2000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524132981_1489744015716698_6781836828722093721_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeF7vfKvkHfK1bf6dVmf151lNQrvlhQa9YU1Cu-WFBr1hfTCrd46rbXFqT7TJ44VO8fk2gftcO3ZCV5jApdlP&_nc_ohc=H7CBZrURYxgQ7kNvwEtMQoh&_nc_oc=Adm0rrLEp8NWIkbZKOE_B4G3F5cdEYv7giZJR-DRWY7FSNP-tdDZCyOqY6mmYcL9NdU&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AHaJq_GK8osdhj1JDWGmJApcdJO3j7nQDzO4jDPpT5qlA&oe=68B7E877' }
+    { id: 1, name: 'Trà Đá', price: 5000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349506692808794/tra-da.png?ex=66548777&is=665335f7&hm=550e561a06733230c4929848529244431f1f23719b0098939c3629e46a74b1e5&' },
+    { id: 2, name: 'Trà Chanh', price: 10000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349539360829562/tra-chanh.png?ex=6654877f&is=665335ff&hm=00d9841f71a4f00b731327ce473c411516dd545d625d57b11d957f897e937d57&' },
+    { id: 3, name: 'Trà Quất', price: 10000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349568285558835/tra-quat.png?ex=66548786&is=66533606&hm=8011246c483d980b182069edc75549045b63b715a31a54722c15147814b74a58&' },
+    { id: 4, name: 'Cafe Nâu', price: 20000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349594537156648/cafe-nau.png?ex=6654878c&is=6653360c&hm=a4b0870942d99d34346e9df56d251f22e83161c4f51e34c97ec66d8e063c8ed4&' },
+    { id: 5, name: 'Cafe Đen', price: 20000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349624599975949/cafe-den.png?ex=66548793&is=66533613&hm=9003c20c0f99276d47b6a4ce3899452b4748184d092c4537300c0f864e4b519a&' },
+    { id: 6, name: 'Bạc Xỉu', price: 25000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349655615707176/bac-xiu.png?ex=6654879a&is=6653361a&hm=4a7065f04b2b2a613f1c911a3b3e215d233406368d4078825c88b688339c0f9a&' },
+    { id: 7, name: 'Cafe Muối', price: 25000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349684347715696/cafe-muoi.png?ex=665487a1&is=66533621&hm=442750e41b2a9d665790412b1a134a62e3d37613396627063f9104064560b41c&' },
+    { id: 8, name: 'Sữa Chua Lắc', price: 25000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349713609355294/sua-chua-lac.png?ex=665487a8&is=66533628&hm=b54a20689b09a473e04e9c354728f32dd756779430c6c06a38096ddf6048590c&' },
+    { id: 9, name: 'SC Lắc Dâu', price: 30000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349743588970526/sua-chua-lac-dau.png?ex=665487b0&is=66533630&hm=895697621c1729487c64a51e626e257088190353c7a72666a3d6d566e133c69c&' },
+    { id: 10, name: 'SC Lắc Việt Quất', price: 30000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349771144062996/sua-chua-lac-viet-quat.png?ex=665487b6&is=66533636&hm=39f20e40854d909d94943714207f2402179836362547b850d53457d19e917d5c&' },
+    { id: 11, name: 'Bim Bim', price: 6000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349811802996846/bim-bim.png?ex=665487c0&is=66533640&hm=990b79727409249e01168f12128a38c28131d279412f1165c92c90858e8b0305&' },
+    { id: 12, name: 'Hướng Dương', price: 10000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349842404096050/huong-duong.png?ex=665487c7&is=66533647&hm=53c52e46b074a3f898305f88426c117b4474704b2b64b584a56a6411d73a6a9b&' },
+    { id: 13, name: 'Thăng Long Cứng', price: 15000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349880227129464/thang-long-cung.png?ex=665487d0&is=66533650&hm=f4e5a95d03831777b7df04f475a1d7f451f2871b635293d052a6572f4ae6886e&' },
+    { id: 14, name: 'Cay Cay', price: 2000, image: 'https://cdn.discordapp.com/attachments/1244349479366656091/1244349914755106886/cay-cay.png?ex=665487d9&is=66533659&hm=94c1f93f53835e39665551c6c5a04555541603953503a2760a5e8e81d77a0631&' }
 ];
 
 const customizationOptions = {
@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderMenu() {
     const menuDiv = document.getElementById('menu');
+    if (!menuDiv) return;
+
     menuDiv.innerHTML = '';
     menuItems.forEach(item => {
         const itemHtml = `
@@ -64,18 +66,20 @@ function renderMenu() {
 }
 
 function setupEventListeners() {
-    document.getElementById('closeCustomizationModal').addEventListener('click', closeCustomizationModal);
-    document.getElementById('addToCartModalBtn').addEventListener('click', addToCartFromModal);
-    document.getElementById('closeOrderModal').addEventListener('click', closeOrderModal);
-    document.getElementById('dineInBtn').addEventListener('click', () => showOrderModal('Uống tại chỗ'));
-    document.getElementById('deliveryBtn').addEventListener('click', () => showOrderModal('Giao hàng'));
-    document.getElementById('submitOrderBtn').addEventListener('click', submitOrder);
-    document.getElementById('cart').addEventListener('click', handleCartActions);
+    document.getElementById('closeCustomizationModal')?.addEventListener('click', closeCustomizationModal);
+    document.getElementById('addToCartModalBtn')?.addEventListener('click', addToCartFromModal);
+    document.getElementById('closeOrderModal')?.addEventListener('click', closeOrderModal);
+    document.getElementById('dineInBtn')?.addEventListener('click', () => showOrderModal('Uống tại chỗ'));
+    document.getElementById('deliveryBtn')?.addEventListener('click', () => showOrderModal('Giao hàng'));
+    document.getElementById('submitOrderBtn')?.addEventListener('click', submitOrder);
+    document.getElementById('cart')?.addEventListener('click', handleCartActions);
 }
 
 function showCustomizationModal(item) {
     currentCustomizingItem = item;
     const modal = document.getElementById('customizationModal');
+    if (!modal) return;
+
     document.getElementById('customizationItemName').innerText = item.name;
 
     const sugarOptionsDiv = document.getElementById('sugarOptions');
@@ -83,22 +87,28 @@ function showCustomizationModal(item) {
     const toppingOptionsDiv = document.getElementById('toppingOptions');
 
     if (noCustomizationIds.includes(item.id)) {
-        sugarOptionsDiv.innerHTML = '';
-        iceOptionsDiv.innerHTML = '';
-        toppingOptionsDiv.innerHTML = '';
+        if (sugarOptionsDiv) sugarOptionsDiv.innerHTML = '';
+        if (iceOptionsDiv) iceOptionsDiv.innerHTML = '';
+        if (toppingOptionsDiv) toppingOptionsDiv.innerHTML = '';
     } else {
-        sugarOptionsDiv.innerHTML = customizationOptions.sugar.map(level => `
-            <label><input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}> ${level}%</label>
-        `).join('');
-        iceOptionsDiv.innerHTML = customizationOptions.ice.map(level => `
-            <label><input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}> ${level}%</label>
-        `).join('');
-
-        toppingOptionsDiv.innerHTML = '';
-        if (item.name.includes('Trà Chanh') || item.name.includes('Trà Quất')) {
-            toppingOptionsDiv.innerHTML = customizationOptions.toppings.map(topping => `
-                <label><input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}"> ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)</label>
+        if (sugarOptionsDiv) {
+            sugarOptionsDiv.innerHTML = customizationOptions.sugar.map(level => `
+                <label><input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}> ${level}%</label>
             `).join('');
+        }
+        if (iceOptionsDiv) {
+            iceOptionsDiv.innerHTML = customizationOptions.ice.map(level => `
+                <label><input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}> ${level}%</label>
+            `).join('');
+        }
+
+        if (toppingOptionsDiv) {
+            toppingOptionsDiv.innerHTML = '';
+            if (item.name.includes('Trà Chanh') || item.name.includes('Trà Quất')) {
+                toppingOptionsDiv.innerHTML = customizationOptions.toppings.map(topping => `
+                    <label><input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}"> ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)</label>
+                `).join('');
+            }
         }
     }
     
@@ -107,14 +117,16 @@ function showCustomizationModal(item) {
 }
 
 function closeCustomizationModal() {
-    document.getElementById('customizationModal').style.display = 'none';
+    const modal = document.getElementById('customizationModal');
+    if (modal) modal.style.display = 'none';
     currentCustomizingItem = null;
 }
 
 function addToCartFromModal() {
     if (!currentCustomizingItem) return;
     
-    const quantity = parseInt(document.getElementById('itemQuantity').value);
+    const quantityInput = document.getElementById('itemQuantity');
+    const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
     
     let selectedSugar = 'N/A';
     let selectedIce = 'N/A';
@@ -122,8 +134,11 @@ function addToCartFromModal() {
     let toppingPrice = 0;
 
     if (!noCustomizationIds.includes(currentCustomizingItem.id)) {
-        selectedSugar = document.querySelector('input[name="sugar"]:checked')?.value || '100';
-        selectedIce = document.querySelector('input[name="ice"]:checked')?.value || '100';
+        const sugarRadio = document.querySelector('input[name="sugar"]:checked');
+        selectedSugar = sugarRadio?.value || '100';
+
+        const iceRadio = document.querySelector('input[name="ice"]:checked');
+        selectedIce = iceRadio?.value || '100';
         
         selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
             name: cb.value,
@@ -150,6 +165,8 @@ function renderCart() {
     const cartDiv = document.getElementById('cart');
     const emptyCartMessage = document.getElementById('emptyCartMessage');
     const totalPriceSpan = document.getElementById('totalPrice');
+
+    if (!cartDiv || !emptyCartMessage || !totalPriceSpan) return;
 
     cartDiv.innerHTML = '';
     let totalPrice = 0;
@@ -188,26 +205,32 @@ function renderCart() {
 }
 
 function handleCartActions(e) {
-    if (e.target.classList.contains('increase-quantity-btn')) {
-        const index = parseInt(e.target.dataset.index);
+    const target = e.target;
+    if (target.classList.contains('increase-quantity-btn')) {
+        const index = parseInt(target.dataset.index);
         cart[index].quantity++;
         renderCart();
-    } else if (e.target.classList.contains('decrease-quantity-btn')) {
-        const index = parseInt(e.target.dataset.index);
+    } else if (target.classList.contains('decrease-quantity-btn')) {
+        const index = parseInt(target.dataset.index);
         if (cart[index].quantity > 1) {
             cart[index].quantity--;
             renderCart();
         }
-    } else if (e.target.classList.contains('remove-from-cart-btn')) {
-        const index = parseInt(e.target.dataset.index);
+    } else if (target.classList.contains('remove-from-cart-btn')) {
+        const index = parseInt(target.dataset.index);
         cart.splice(index, 1);
         renderCart();
     }
 }
 
 function showOrderModal(orderType) {
-    document.getElementById('orderModalTitle').textContent = `Đơn hàng: ${orderType}`;
+    const orderModalTitle = document.getElementById('orderModalTitle');
     const orderOptions = document.getElementById('orderOptions');
+    const orderModal = document.getElementById('orderModal');
+
+    if (!orderModalTitle || !orderOptions || !orderModal) return;
+
+    orderModalTitle.textContent = `Đơn hàng: ${orderType}`;
     orderOptions.innerHTML = '';
     
     let htmlContent = '';
@@ -247,8 +270,8 @@ function showOrderModal(orderType) {
     }
     
     orderOptions.innerHTML = htmlContent;
-    document.getElementById('orderModal').dataset.orderType = orderType;
-    document.getElementById('orderModal').style.display = 'flex';
+    orderModal.dataset.orderType = orderType;
+    orderModal.style.display = 'flex';
 }
 
 async function submitOrder() {
@@ -257,8 +280,13 @@ async function submitOrder() {
         return;
     }
     
-    const orderType = document.getElementById('orderModal').dataset.orderType;
-    const orderNote = document.getElementById('orderNote').value;
+    const orderModal = document.getElementById('orderModal');
+    const orderNoteInput = document.getElementById('orderNote');
+
+    if (!orderModal || !orderNoteInput) return;
+
+    const orderType = orderModal.dataset.orderType;
+    const orderNote = orderNoteInput.value;
     
     const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
@@ -273,7 +301,8 @@ async function submitOrder() {
     };
 
     if (orderType === 'Uống tại chỗ') {
-        const tableNumber = document.getElementById('tableNumber').value;
+        const tableNumberSelect = document.getElementById('tableNumber');
+        const tableNumber = tableNumberSelect?.value;
         if (!tableNumber) {
             alert('Vui lòng chọn số bàn.');
             return;
@@ -283,9 +312,13 @@ async function submitOrder() {
             tableNumber: tableNumber,
         };
     } else {
-        const customerName = document.getElementById('customerName').value;
-        const customerPhone = document.getElementById('customerPhone').value;
-        const deliveryAddress = document.getElementById('deliveryAddress').value;
+        const customerNameInput = document.getElementById('customerName');
+        const customerPhoneInput = document.getElementById('customerPhone');
+        const deliveryAddressInput = document.getElementById('deliveryAddress');
+
+        const customerName = customerNameInput?.value;
+        const customerPhone = customerPhoneInput?.value;
+        const deliveryAddress = deliveryAddressInput?.value;
 
         if (!customerName || !customerPhone || !deliveryAddress) {
             alert('Vui lòng điền đầy đủ thông tin giao hàng.');
@@ -312,5 +345,6 @@ async function submitOrder() {
 }
 
 function closeOrderModal() {
-    document.getElementById('orderModal').style.display = 'none';
+    const modal = document.getElementById('orderModal');
+    if (modal) modal.style.display = 'none';
 }
