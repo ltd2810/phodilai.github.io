@@ -76,7 +76,7 @@
             cursor: pointer;
         }
         
-        .order-options input, .order-options textarea, .order-options select {
+        .order-options input, .order-options textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -90,11 +90,12 @@
     <div class="container">
         <h1>PHỐ ĐI LẠI LÝ NHÂN</h1>
         <div id="menu" class="menu-container">
+            <!-- Menu items will be rendered here by JavaScript -->
         </div>
 
         <h1>Giỏ Hàng</h1>
         <div id="cart">
-            <p id="emptyCartMessage">Giỏ hàng của bạn đang trống!</p>
+            <!-- Cart items will be rendered here by JavaScript -->
         </div>
         <p>Tổng tiền: <span id="totalPrice">0</span> VNĐ</p>
 
@@ -104,6 +105,7 @@
         </div>
     </div>
 
+    <!-- Hộp thoại tùy chỉnh (Customization Modal) -->
     <div id="customizationModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeCustomizationModal">&times;</span>
@@ -115,22 +117,19 @@
                 <div id="iceOptions" class="options-group"></div>
                 <h4>Topping</h4>
                 <div id="toppingOptions" class="options-group"></div>
-                
-                <h4>Số lượng</h4>
-                <div id="quantityOptions" class="options-group">
-                    <input type="number" id="itemQuantity" name="itemQuantity" value="1" min="1">
-                </div>
             </div>
             <button id="addToCartModalBtn">Thêm vào giỏ</button>
         </div>
     </div>
 
+    <!-- Hộp thoại đặt hàng (Order Modal) -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeOrderModal">&times;</span>
             <h3 id="orderModalTitle"></h3>
             <div id="orderOptions" class="order-options">
-                </div>
+                <!-- Nội dung sẽ được render bằng JavaScript -->
+            </div>
             <button id="submitOrderBtn">Gửi Đơn Hàng</button>
         </div>
     </div>
