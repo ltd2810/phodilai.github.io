@@ -250,11 +250,6 @@ function openOrderModal(orderType) {
     document.getElementById('orderModal').dataset.orderType = orderType;
     document.getElementById('orderModal').style.display = 'flex';
 }
-    
-    orderOptions.innerHTML = htmlContent;
-    document.getElementById('orderModal').dataset.orderType = orderType;
-    document.getElementById('orderModal').style.display = 'flex';
-}
 
 async function submitOrder() {
     if (cart.length === 0) {
