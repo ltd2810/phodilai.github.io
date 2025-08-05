@@ -1,5 +1,5 @@
 import { db } from './firebase-config.js';
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const menuItems = [
     { id: 1, name: 'Trà Đá', price: 5000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/528467272_1088978119425078_2155584391935203864_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE8KngH6lQGpCaJPqs1qYepMyAC2J3e4DwzIALYnd7gPPeFYU3bIXha77SWzRvR9Zfq4X6PVEnoZsAe68Y78RQN&_nc_ohc=N_OgxAkk42oQ7kNvwHbPqIm&_nc_oc=AdkPGcUanFFqRnhWJFp6pqjFCoEDTQ_8dCq1vs9e0Zgyr_HC5AWe6fJNyAUGi1a-5Bs&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEfxzLheoCdwR9p7XPGTDnQsL1StTCc0EPXhXRainL3Zw&oe=68B7DD19' },
@@ -31,22 +31,18 @@ const noCustomizationIds = [1, 11, 12, 13, 14];
 let cart = [];
 let currentCustomizingItem = null;
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderMenu();
-    setupEventListeners();
-    renderCart();
-});
-
 function renderMenu() {
     const menuDiv = document.getElementById('menu');
+    if (!menuDiv) return;
+    
     menuDiv.innerHTML = '';
     menuItems.forEach(item => {
         const itemHtml = `
-            <div class="menu-item" data-id="${item.id}">
+            <div class="menu-item">
                 <img src="${item.image}" alt="${item.name}">
                 <h3>${item.name}</h3>
                 <p>${item.price.toLocaleString('vi-VN')} VNĐ</p>
-                <button class="customize-btn" data-id="${item.id}">Thêm vào giỏ</button>
+                <button class="customize-btn" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Thêm vào giỏ</button>
             </div>
         `;
         menuDiv.innerHTML += itemHtml;
@@ -54,61 +50,83 @@ function renderMenu() {
 
     document.querySelectorAll('.customize-btn').forEach(button => {
         button.addEventListener('click', (e) => {
-            const itemId = parseInt(e.target.dataset.id);
-            const item = menuItems.find(i => i.id === itemId);
-            if (item) {
-                showCustomizationModal(item);
-            }
+            const item = {
+                id: parseInt(e.target.dataset.id),
+                name: e.target.dataset.name,
+                price: parseFloat(e.target.dataset.price),
+                image: e.target.dataset.image
+            };
+            showCustomizationModal(item);
         });
     });
-}
-
-function setupEventListeners() {
-    document.getElementById('closeCustomizationModal').addEventListener('click', closeCustomizationModal);
-    document.getElementById('addToCartModalBtn').addEventListener('click', addToCartFromModal);
-    document.getElementById('closeOrderModal').addEventListener('click', closeOrderModal);
-    document.getElementById('dineInBtn').addEventListener('click', () => openOrderModal('Uống tại chỗ'));
-    document.getElementById('deliveryBtn').addEventListener('click', () => openOrderModal('Giao hàng'));
-    document.getElementById('submitOrderBtn').addEventListener('click', submitOrder);
-    document.getElementById('cart').addEventListener('click', handleCartActions);
 }
 
 function showCustomizationModal(item) {
     currentCustomizingItem = item;
     const modal = document.getElementById('customizationModal');
-    document.getElementById('customizationItemName').innerText = item.name;
-
+    if (!modal) return;
+    
+    const customizationItemName = document.getElementById('customizationItemName');
     const sugarOptionsDiv = document.getElementById('sugarOptions');
     const iceOptionsDiv = document.getElementById('iceOptions');
     const toppingOptionsDiv = document.getElementById('toppingOptions');
 
+    if (customizationItemName) {
+        customizationItemName.innerText = currentCustomizingItem.name;
+    }
+    
+    // Kiểm tra xem món có tùy chỉnh không
     if (noCustomizationIds.includes(item.id)) {
-        sugarOptionsDiv.innerHTML = '';
-        iceOptionsDiv.innerHTML = '';
-        toppingOptionsDiv.innerHTML = '';
+        if (sugarOptionsDiv) sugarOptionsDiv.innerHTML = '';
+        if (iceOptionsDiv) iceOptionsDiv.innerHTML = '';
+        if (toppingOptionsDiv) toppingOptionsDiv.innerHTML = '';
     } else {
-        sugarOptionsDiv.innerHTML = customizationOptions.sugar.map(level => `
-            <label><input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}> ${level}%</label>
-        `).join('');
-        iceOptionsDiv.innerHTML = customizationOptions.ice.map(level => `
-            <label><input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}> ${level}%</label>
-        `).join('');
+        if (sugarOptionsDiv) {
+            sugarOptionsDiv.innerHTML = `
+                ${customizationOptions.sugar.map(level => `
+                    <label>
+                        <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
+                        ${level}%
+                    </label>
+                `).join('')}
+            `;
+        }
+    
+        if (iceOptionsDiv) {
+            iceOptionsDiv.innerHTML = `
+                ${customizationOptions.ice.map(level => `
+                    <label>
+                        <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
+                        ${level}%
+                    </label>
+                `).join('')}
+            `;
+        }
 
-        toppingOptionsDiv.innerHTML = '';
-        if (item.name.includes('Trà Chanh') || item.name.includes('Trà Quất')) {
-            toppingOptionsDiv.innerHTML = customizationOptions.toppings.map(topping => `
-                <label><input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}"> ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)</label>
-            `).join('');
+        if (toppingOptionsDiv) {
+            toppingOptionsDiv.innerHTML = '';
+            if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
+                toppingOptionsDiv.innerHTML = `
+                    ${customizationOptions.toppings.map(topping => `
+                        <label>
+                            <input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}">
+                            ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)
+                        </label>
+                    `).join('')}
+                `;
+            }
         }
     }
     
-    document.getElementById('itemQuantity').value = 1;
     modal.style.display = 'flex';
 }
 
 function closeCustomizationModal() {
-    document.getElementById('customizationModal').style.display = 'none';
-    currentCustomizingItem = null;
+    const modal = document.getElementById('customizationModal');
+    if (modal) {
+        modal.style.display = 'none';
+        currentCustomizingItem = null;
+    }
 }
 
 function addToCartFromModal() {
@@ -122,8 +140,16 @@ function addToCartFromModal() {
     let toppingPrice = 0;
 
     if (!noCustomizationIds.includes(currentCustomizingItem.id)) {
-        selectedSugar = document.querySelector('input[name="sugar"]:checked')?.value || '100';
-        selectedIce = document.querySelector('input[name="ice"]:checked')?.value || '100';
+        const selectedSugarInput = document.querySelector('input[name="sugar"]:checked');
+        const selectedIceInput = document.querySelector('input[name="ice"]:checked');
+
+        if (!selectedSugarInput || !selectedIceInput) {
+            alert("Vui lòng chọn mức đường và đá!");
+            return;
+        }
+
+        selectedSugar = selectedSugarInput.value;
+        selectedIce = selectedIceInput.value;
         
         selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
             name: cb.value,
@@ -135,8 +161,8 @@ function addToCartFromModal() {
     const itemWithCustomization = {
         ...currentCustomizingItem,
         quantity: quantity,
-        sugar: selectedSugar,
-        ice: selectedIce,
+        sugar: `${selectedSugar}%`,
+        ice: `${selectedIce}%`,
         toppings: selectedToppings,
         price: currentCustomizingItem.price + toppingPrice
     };
@@ -151,13 +177,22 @@ function renderCart() {
     const emptyCartMessage = document.getElementById('emptyCartMessage');
     const totalPriceSpan = document.getElementById('totalPrice');
 
+    if (!cartDiv || !totalPriceSpan) {
+        console.error("Không tìm thấy các phần tử giỏ hàng cần thiết.");
+        return;
+    }
+
     cartDiv.innerHTML = '';
     let totalPrice = 0;
 
     if (cart.length === 0) {
-        emptyCartMessage.style.display = 'block';
+        if (emptyCartMessage) {
+            emptyCartMessage.style.display = 'block';
+        }
     } else {
-        emptyCartMessage.style.display = 'none';
+        if (emptyCartMessage) {
+            emptyCartMessage.style.display = 'none';
+        }
         cart.forEach((item, index) => {
             const itemTotal = item.price * item.quantity;
             totalPrice += itemTotal;
@@ -165,16 +200,19 @@ function renderCart() {
             let customizationString = '';
             if (item.sugar !== 'N/A' || item.ice !== 'N/A' || (item.toppings && item.toppings.length > 0)) {
                 const toppingsNames = item.toppings.map(t => t.name).join(', ');
-                customizationString = ` (${item.sugar}% đường, ${item.ice}% đá${toppingsNames ? `, Topping: ${toppingsNames}` : ''})`;
+                customizationString = ` (${item.sugar} đường, ${item.ice} đá${toppingsNames ? `, Topping: ${toppingsNames}` : ''})`;
             }
 
             const cartItemHtml = `
                 <div class="cart-item">
-                    <span>${item.name} (SL: ${item.quantity})${customizationString}</span>
-                    <br>
-                    <span>${itemTotal.toLocaleString('vi-VN')} VNĐ</span>
-                    <div class="cart-actions">
+                    <div class="order-details">
+                        <span>${item.name} (SL: ${item.quantity})${customizationString}</span>
+                        <br>
+                        <span>${(item.price * item.quantity).toLocaleString('vi-VN')} VNĐ</span>
+                    </div>
+                    <div class="order-actions">
                         <button class="decrease-quantity-btn" data-index="${index}">-</button>
+                        <span>${item.quantity}</span>
                         <button class="increase-quantity-btn" data-index="${index}">+</button>
                         <button class="remove-from-cart-btn" data-index="${index}">Xóa</button>
                     </div>
@@ -185,132 +223,170 @@ function renderCart() {
     }
 
     totalPriceSpan.innerText = totalPrice.toLocaleString('vi-VN');
-}
 
-function handleCartActions(e) {
-    if (e.target.classList.contains('increase-quantity-btn')) {
-        const index = parseInt(e.target.dataset.index);
-        cart[index].quantity++;
-        renderCart();
-    } else if (e.target.classList.contains('decrease-quantity-btn')) {
-        const index = parseInt(e.target.dataset.index);
-        if (cart[index].quantity > 1) {
-            cart[index].quantity--;
+    document.querySelectorAll('.increase-quantity-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            cart[index].quantity++;
             renderCart();
-        }
-    } else if (e.target.classList.contains('remove-from-cart-btn')) {
-        const index = parseInt(e.target.dataset.index);
-        cart.splice(index, 1);
-        renderCart();
-    }
+        });
+    });
+
+    document.querySelectorAll('.decrease-quantity-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            if (cart[index].quantity > 1) {
+                cart[index].quantity--;
+            }
+            renderCart();
+        });
+    });
+
+    document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            cart.splice(index, 1);
+            renderCart();
+        });
+    });
 }
 
-function openOrderModal(orderType) {
-    document.getElementById('orderModalTitle').textContent = `Đơn hàng: ${orderType}`;
-    const orderOptions = document.getElementById('orderOptions');
-    orderOptions.innerHTML = '';
-    
-    let htmlContent = '';
-    
-    if (orderType === 'Uống tại chỗ') {
-        htmlContent = `
-            <div class="options-group">
-                <label for="tableNumber">Số bàn:</label>
-                <select id="tableNumber">
-                    ${Array.from({length: 20}, (_, i) => `<option value="${i + 1}">Bàn ${i + 1}</option>`).join('')}
-                </select>
-            </div>
-            <div class="options-group">
-                <label for="orderNote">Ghi chú:</label>
-                <textarea id="orderNote" placeholder="Ví dụ: Ít đường, ít đá..."></textarea>
-            </div>
-        `;
-    } else {
-        htmlContent = `
-            <div class="options-group">
-                <label for="customerName">Tên của bạn:</label>
-                <input type="text" id="customerName" placeholder="Nhập tên của bạn">
-            </div>
-            <div class="options-group">
-                <label for="customerPhone">Số điện thoại:</label>
-                <input type="tel" id="customerPhone" placeholder="Nhập số điện thoại của bạn">
-            </div>
-            <div class="options-group">
-                <label for="deliveryAddress">Địa chỉ:</label>
-                <textarea id="deliveryAddress" placeholder="Nhập địa chỉ của bạn"></textarea>
-            </div>
-            <div class="options-group">
-                <label for="orderNote">Ghi chú:</label>
-                <textarea id="orderNote" placeholder="Ví dụ: Ít đường, ít đá..."></textarea>
-            </div>
-        `;
-    }
-    
-    orderOptions.innerHTML = htmlContent;
-    document.getElementById('orderModal').dataset.orderType = orderType;
-    document.getElementById('orderModal').style.display = 'flex';
-}
-
-async function submitOrder() {
+function showOrderModal(orderType) {
     if (cart.length === 0) {
         alert("Giỏ hàng của bạn đang trống!");
         return;
     }
+
+    const modal = document.getElementById('orderModal');
+    const orderModalTitle = document.getElementById('orderModalTitle');
+    const orderOptionsDiv = document.getElementById('orderOptions');
     
-    const orderType = document.getElementById('orderModal').dataset.orderType;
-    const orderNote = document.getElementById('orderNote').value;
-    
-    const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    if (!modal || !orderModalTitle || !orderOptionsDiv) return;
 
-    let orderData = {
-        items: cart,
-        totalPrice: totalPrice,
-        note: orderNote,
-        status: 'Đang chờ xử lý',
-        isPaid: false,
-        createdAt: serverTimestamp(),
-        customerInfo: {}
-    };
+    orderOptionsDiv.innerHTML = ''; 
 
-    if (orderType === 'Uống tại chỗ') {
-        const tableNumber = document.getElementById('tableNumber').value;
-        if (!tableNumber) {
-            alert('Vui lòng chọn số bàn.');
-            return;
-        }
-        orderData.customerInfo = {
-            type: 'Uống tại chỗ',
-            tableNumber: tableNumber,
-        };
-    } else {
-        const customerName = document.getElementById('customerName').value;
-        const customerPhone = document.getElementById('customerPhone').value;
-        const deliveryAddress = document.getElementById('deliveryAddress').value;
-
-        if (!customerName || !customerPhone || !deliveryAddress) {
-            alert('Vui lòng điền đầy đủ thông tin giao hàng.');
-            return;
-        }
-        orderData.customerInfo = {
-            type: 'Giao hàng',
-            customerName: customerName,
-            phone: customerPhone,
-            address: deliveryAddress
-        };
+    if (orderType === 'dine-in') {
+        orderModalTitle.innerText = 'Vui lòng điền số bàn';
+        orderOptionsDiv.innerHTML = `<input type="text" id="tableNumber" placeholder="Số bàn" required>`;
+    } else if (orderType === 'delivery') {
+        orderModalTitle.innerText = 'Thông tin Đặt Giao Hàng';
+        orderOptionsDiv.innerHTML = `
+            <input type="text" id="customerName" placeholder="Tên khách hàng" required>
+            <input type="text" id="phone" placeholder="Số điện thoại" required>
+            <textarea id="address" placeholder="Địa chỉ" required></textarea>
+        `;
     }
 
-    try {
-        await addDoc(collection(db, "orders"), orderData);
-        alert('Đơn hàng của bạn đã được gửi thành công!');
-        cart = [];
-        renderCart();
-        closeOrderModal();
-    } catch (error) {
-        console.error("Lỗi khi gửi đơn hàng: ", error);
-        alert('Đã có lỗi xảy ra. Vui lòng thử lại.');
+    orderOptionsDiv.innerHTML += `<textarea id="orderNote" placeholder="Ghi chú"></textarea>`;
+
+    modal.style.display = 'flex';
+    const submitBtn = document.getElementById('submitOrderBtn');
+    if (submitBtn) {
+        submitBtn.dataset.orderType = orderType;
     }
 }
 
 function closeOrderModal() {
-    document.getElementById('orderModal').style.display = 'none';
+    const modal = document.getElementById('orderModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
+
+async function submitOrder() {
+    const submitBtn = document.getElementById('submitOrderBtn');
+    if (!submitBtn) return;
+    
+    const orderType = submitBtn.dataset.orderType;
+    let customerInfo = {};
+    const orderNoteEl = document.getElementById('orderNote');
+    const orderNote = orderNoteEl ? orderNoteEl.value : '';
+
+    if (orderType === 'dine-in') {
+        const tableNumberEl = document.getElementById('tableNumber');
+        const tableNumber = tableNumberEl ? tableNumberEl.value : '';
+        if (!tableNumber) {
+            alert("Vui lòng nhập số bàn!");
+            return;
+        }
+        customerInfo = { type: 'Uống tại chỗ', tableNumber };
+    } else if (orderType === 'delivery') {
+        const customerNameEl = document.getElementById('customerName');
+        const phoneEl = document.getElementById('phone');
+        const addressEl = document.getElementById('address');
+        const customerName = customerNameEl ? customerNameEl.value : '';
+        const phone = phoneEl ? phoneEl.value : '';
+        const address = addressEl ? addressEl.value : '';
+        
+        if (!customerName || !phone || !address) {
+            alert("Vui lòng điền đầy đủ thông tin giao hàng!");
+            return;
+        }
+        customerInfo = { type: 'Giao hàng', customerName, phone, address };
+    } else {
+        alert("Có lỗi xảy ra, vui lòng thử lại!");
+        return;
+    }
+
+    const totalPriceSpan = document.getElementById('totalPrice');
+    if (!totalPriceSpan) {
+        alert("Không tìm thấy tổng tiền, vui lòng tải lại trang!");
+        return;
+    }
+
+    const newOrder = {
+        items: cart,
+        customerInfo: customerInfo,
+        totalPrice: parseFloat(totalPriceSpan.innerText.replace(/[^0-9]/g, '')),
+        status: 'Đang chờ xử lý',
+        isPaid: false,
+        note: orderNote,
+        createdAt: new Date()
+    };
+    
+    try {
+        await addDoc(collection(db, "orders"), newOrder);
+        alert("Đơn hàng của bạn đã được gửi thành công!");
+        cart = [];
+        renderCart();
+        closeOrderModal();
+    } catch (e) {
+        console.error("Lỗi khi thêm đơn hàng: ", e);
+        alert("Có lỗi xảy ra khi gửi đơn hàng!");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderMenu();
+    renderCart();
+
+    const dineInBtn = document.getElementById('dineInBtn');
+    if (dineInBtn) {
+        dineInBtn.addEventListener('click', () => showOrderModal('dine-in'));
+    }
+
+    const deliveryBtn = document.getElementById('deliveryBtn');
+    if (deliveryBtn) {
+        deliveryBtn.addEventListener('click', () => showOrderModal('delivery'));
+    }
+
+    const submitOrderBtn = document.getElementById('submitOrderBtn');
+    if (submitOrderBtn) {
+        submitOrderBtn.addEventListener('click', submitOrder);
+    }
+    
+    const addToCartModalBtn = document.getElementById('addToCartModalBtn');
+    if (addToCartModalBtn) {
+        addToCartModalBtn.addEventListener('click', addToCartFromModal);
+    }
+    
+    const closeCustomizationModalBtn = document.getElementById('closeCustomizationModal');
+    if (closeCustomizationModalBtn) {
+        closeCustomizationModalBtn.addEventListener('click', closeCustomizationModal);
+    }
+
+    const closeOrderModalBtn = document.getElementById('closeOrderModal');
+    if (closeOrderModalBtn) {
+        closeOrderModalBtn.addEventListener('click', closeOrderModal);
+    }
+});
