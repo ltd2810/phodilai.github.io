@@ -12,10 +12,10 @@ const menuItems = [
     { id: 8, name: 'Sữa Chua Lắc', price: 25000, image: 'https://scontent.fhan4-1.fna.fbcdn.net/v/t1.15752-9/526441291_1269879847333066_3500046320414158270_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFyarHVjF3QnxKMb4YYwWz9F7FpOKRIH6oXsWk4pEgfqmFYv12w5gK5p9AIGLgx8QgkPg_-b0w_sdYrEQVdMw-B&_nc_ohc=5-B93Gxy0-EQ7kNvwGHfjj2&_nc_oc=Adm-4fOjPVX1QKYdRcV7_RCYCYSpIGbvEpQ_znV51k6PN9aFG_YBt2th064-0YPQAr4&_nc_zt=23&_nc_ht=scontent.fhan4-1.fna&oh=03_Q7cD3AFvXazCDxpd05IoGzWSMFeJVjzWMZNEweosl8D-vQeANQ&oe=68B7F3A9' },
     { id: 9, name: 'SC Lắc Dâu', price: 30000, image: 'https://scontent.fhan3-3.fna.fbcdn.net/v/t1.15752-9/526149395_2153801508467855_2307181939167630771_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE-gTrGzT9cmrciA4h22iJqcAlpSjQIa5dwCWlKNAhrl5WkzMAcZdJiDR-MA6CzY8oXXlNVuQwWK9ubGPGNf5o6&_nc_ohc=dv8zo7axIxYQ7kNvwEjrO1m&_nc_oc=AdllFenUYhdF6e_5nBlcMssAlFeCLokRcqu3IF4CQi8Sn1ndbPDiVlToLsYcEcY7O7w&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&oh=03_Q7cD3AGrPA15Ejy3ZArmQ3KQPugODcHDJ3vrwnSP3vnDwDBdjg&oe=68B7CC92' },
     { id: 10, name: 'SC Lắc Việt Quất', price: 30000, image: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.15752-9/525416436_1665455384143810_832299445849766471_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEiSK4_5ZzuCmS8D8bfflrlMe6RtTQ623Ux7pG1NDrbdRg9YANNAfrz_JSh_p2RL89NGl1VFIRA2XBeHCTvB-23&_nc_ohc=1cc_7dVXIMQQ7kNvwHwZmZ4&_nc_oc=AdlMVtlsESWWmCt3IY3GuOCZz-IhQs_DY3JniLzbhyhM0MFCgsogvMPP7rFy7GhPkpA&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&oh=03_Q7cD3AHDlBQ7uaCxAju3nDTXWt7fLFyFoDY1jAg-Dh5wTxndAw&oe=68B7C4B9' },
-    { id: 11, name: 'Bim Bim', price: 6000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524654314_1855264411999774_734793370755222912_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHycIby3yHpZwC1ev7S6XtT0515WdA5WfbTnXlZ0DlZ9mwbH-ZA4qGcmyT4UxtpZ6K8eIdVCcgmfq84MRvnub67&_nc_ohc=IzVMClZJ99cQ7kNvwFLeYLP&_nc_oc=Adnp6CU4pnefUdWqB18-0ViPPWKQaRcz9CEgoAmairJNAWFsW37-61Dsvlww6Icfwlc&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AE6Gm5_ECBuQQQmvni5sP9gr4o-2O2fVzKasuFUYLWijQ&oe=68B7CBCD' },
+    { id: 11, name: 'Bim Bim', price: 6000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524654314_1855264411999774_734793370755222912_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHycIby3yHpZwC1ev7S6XtT0515WdA5WfbTnXlZ0DlZ9mwbH-ZA4qGcmyT4UxtpZ6K8eIdVCcgmfq84MRvnub67&_nc_ohc=IzVMClZJ99cQ7kNvwFLeYLP&_nc_oc=Adnp6CU4pnefUdWqB18-0ViPPWKQaRcz9CEgoAmairJNAWFsW37-61Dsvw6Icfwlc&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AE6Gm5_ECBuQQQmvni5sP9gr4o-2O2fVzKasuFUYLWijQ&oe=68B7CBCD' },
     { id: 12, name: 'Hướng Dương', price: 10000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/527231823_1330496755315334_823293477744792975_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGeTt6nz7F4x12G5Ojg1v0tSM3XShVapZBIzddKFVqlkAJHhNymSVRHbq0we9Z6QA3JFHB_aGCEwp8VH-D9wOc3&_nc_ohc=YAkstTobzxgQ7kNvwHhsam9&_nc_oc=Adl4aSopIwhLLiwzhoytB_HIG2cgMTMwnWkjo_Mas0cEghCnlbDrpT7Qy9VYGaWbsec&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AEKJy4RVDwl_cx_6oS4dVYI7ibXxF4ygd8-yGED2bRkww&oe=68B7EAD1' },
     { id: 13, name: 'Thăng Long Cứng', price: 15000, image: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.15752-9/524655567_762633793162981_6459701164747945606_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEcNByng6NdTKccV05_kI8yqHKQorSebNCocpCitJ5s0O_yVn3xYuAoQY_dHuSVj4tig4t93xDF3_-uLqg8RUyy&_nc_ohc=2rAo6845W-EQ7kNvwHqDqk_&_nc_oc=AdlLigFFcdKwVsGV_VV6VubPOxTwkKdKE6uF0uCS0OrTdaINLWVjd_mDoYoiMtlLwak&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&oh=03_Q7cD3AFLdnqYJCKFb1PiRKB57Uot2VFQ7eZAvYEuYH_GJKSmdA&oe=68B7E56E' },
-    { id: 14, name: 'Cay Cay', price: 2000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524132981_1489744015716698_6781836828722093721_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeF7vfKvkHfK1bf6dVmf151lNQrvlhQa9YU1Cu-WFBr1hfTCrd46rbXFqT7TJ44VO8We8fk2gftcO3ZCV5jApdlP&_nc_ohc=H7CBZrURYxgQ7kNvwEtMQoh&_nc_oc=Adm0rrLEp8NWIkbZKOE_B4G3F5cdEYv7giZJR-DRWY7FSNP-tdDZCyOqY6mmYcL9NdU&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AHaJq_GK8osdhj1JDWGmJApcdJO3j7nQDzO4jDPpT5qlA&oe=68B7E877' }
+    { id: 14, name: 'Cay Cay', price: 2000, image: 'https://scontent.fhan4-3.fna.fbcdn.net/v/t1.15752-9/524132981_1489744015716698_6781836828722093721_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeF7vfKvkHfK1bf6dVmf151lNQrvlhQa9YU1Cu-WFBr1hfTCrd46rbXFqT7TJ44VO8fk2gftcO3ZCV5jApdlP&_nc_ohc=H7CBZrURYxgQ7kNvwEtMQoh&_nc_oc=Adm0rrLEp8NWIkbZKOE_B4G3F5cdEYv7giZJR-DRWY7FSNP-tdDZCyOqY6mmYcL9NdU&_nc_zt=23&_nc_ht=scontent.fhan4-3.fna&oh=03_Q7cD3AHaJq_GK8osdhj1JDWGmJApcdJO3j7nQDzO4jDPpT5qlA&oe=68B7E877' }
 ];
 
 const customizationOptions = {
@@ -26,11 +26,15 @@ const customizationOptions = {
     ]
 };
 
+const noCustomizationIds = [1, 11, 12, 13, 14];
+
 let cart = [];
 let currentCustomizingItem = null;
 
 function renderMenu() {
     const menuDiv = document.getElementById('menu');
+    if (!menuDiv) return;
+    
     menuDiv.innerHTML = '';
     menuItems.forEach(item => {
         const itemHtml = `
@@ -43,6 +47,7 @@ function renderMenu() {
         `;
         menuDiv.innerHTML += itemHtml;
     });
+
     document.querySelectorAll('.customize-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const item = {
@@ -59,66 +64,103 @@ function renderMenu() {
 function showCustomizationModal(item) {
     currentCustomizingItem = item;
     const modal = document.getElementById('customizationModal');
-    document.getElementById('customizationItemName').innerText = currentCustomizingItem.name;
+    if (!modal) return;
     
+    const customizationItemName = document.getElementById('customizationItemName');
     const sugarOptionsDiv = document.getElementById('sugarOptions');
-    sugarOptionsDiv.innerHTML = `
-        <p>Đường:</p>
-        ${customizationOptions.sugar.map(level => `
-            <label>
-                <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
-                ${level}%
-            </label>
-        `).join('')}
-    `;
-
     const iceOptionsDiv = document.getElementById('iceOptions');
-    iceOptionsDiv.innerHTML = `
-        <p>Đá:</p>
-        ${customizationOptions.ice.map(level => `
-            <label>
-                <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
-                ${level}%
-            </label>
-        `).join('')}
-    `;
-
     const toppingOptionsDiv = document.getElementById('toppingOptions');
-    toppingOptionsDiv.innerHTML = '';
-    if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
-        toppingOptionsDiv.innerHTML = `
-            <p>Topping:</p>
-            ${customizationOptions.toppings.map(topping => `
-                <label>
-                    <input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}">
-                    ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)
-                </label>
-            `).join('')}
-        `;
-    }
 
+    if (customizationItemName) {
+        customizationItemName.innerText = currentCustomizingItem.name;
+    }
+    
+    // Kiểm tra xem món có tùy chỉnh không
+    if (noCustomizationIds.includes(item.id)) {
+        if (sugarOptionsDiv) sugarOptionsDiv.innerHTML = '';
+        if (iceOptionsDiv) iceOptionsDiv.innerHTML = '';
+        if (toppingOptionsDiv) toppingOptionsDiv.innerHTML = '';
+    } else {
+        if (sugarOptionsDiv) {
+            sugarOptionsDiv.innerHTML = `
+                ${customizationOptions.sugar.map(level => `
+                    <label>
+                        <input type="radio" name="sugar" value="${level}" ${level === 100 ? 'checked' : ''}>
+                        ${level}%
+                    </label>
+                `).join('')}
+            `;
+        }
+    
+        if (iceOptionsDiv) {
+            iceOptionsDiv.innerHTML = `
+                ${customizationOptions.ice.map(level => `
+                    <label>
+                        <input type="radio" name="ice" value="${level}" ${level === 100 ? 'checked' : ''}>
+                        ${level}%
+                    </label>
+                `).join('')}
+            `;
+        }
+
+        if (toppingOptionsDiv) {
+            toppingOptionsDiv.innerHTML = '';
+            if (currentCustomizingItem.name.includes('Trà Chanh') || currentCustomizingItem.name.includes('Trà Quất')) {
+                toppingOptionsDiv.innerHTML = `
+                    ${customizationOptions.toppings.map(topping => `
+                        <label>
+                            <input type="checkbox" name="topping" value="${topping.name}" data-price="${topping.price}">
+                            ${topping.name} (+${topping.price.toLocaleString('vi-VN')} VNĐ)
+                        </label>
+                    `).join('')}
+                `;
+            }
+        }
+    }
+    
     modal.style.display = 'flex';
 }
 
 function closeCustomizationModal() {
-    document.getElementById('customizationModal').style.display = 'none';
-    currentCustomizingItem = null;
+    const modal = document.getElementById('customizationModal');
+    if (modal) {
+        modal.style.display = 'none';
+        currentCustomizingItem = null;
+    }
 }
 
 function addToCartFromModal() {
     if (!currentCustomizingItem) return;
     
-    const selectedSugar = document.querySelector('input[name="sugar"]:checked').value;
-    const selectedIce = document.querySelector('input[name="ice"]:checked').value;
-    const selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
-        name: cb.value,
-        price: parseInt(cb.dataset.price)
-    }));
+    const quantity = parseInt(document.getElementById('itemQuantity').value);
+    
+    let selectedSugar = 'N/A';
+    let selectedIce = 'N/A';
+    let selectedToppings = [];
+    let toppingPrice = 0;
 
-    const toppingPrice = selectedToppings.reduce((total, topping) => total + topping.price, 0);
+    if (!noCustomizationIds.includes(currentCustomizingItem.id)) {
+        const selectedSugarInput = document.querySelector('input[name="sugar"]:checked');
+        const selectedIceInput = document.querySelector('input[name="ice"]:checked');
+
+        if (!selectedSugarInput || !selectedIceInput) {
+            alert("Vui lòng chọn mức đường và đá!");
+            return;
+        }
+
+        selectedSugar = selectedSugarInput.value;
+        selectedIce = selectedIceInput.value;
+        
+        selectedToppings = Array.from(document.querySelectorAll('input[name="topping"]:checked')).map(cb => ({
+            name: cb.value,
+            price: parseInt(cb.dataset.price)
+        }));
+        toppingPrice = selectedToppings.reduce((total, topping) => total + topping.price, 0);
+    }
+    
     const itemWithCustomization = {
         ...currentCustomizingItem,
-        quantity: 1,
+        quantity: quantity,
         sugar: `${selectedSugar}%`,
         ice: `${selectedIce}%`,
         toppings: selectedToppings,
@@ -133,6 +175,13 @@ function addToCartFromModal() {
 function renderCart() {
     const cartDiv = document.getElementById('cart');
     const emptyCartMessage = document.getElementById('emptyCartMessage');
+    const totalPriceSpan = document.getElementById('totalPrice');
+
+    if (!cartDiv || !totalPriceSpan) {
+        console.error("Không tìm thấy các phần tử giỏ hàng cần thiết.");
+        return;
+    }
+
     cartDiv.innerHTML = '';
     let totalPrice = 0;
 
@@ -149,7 +198,7 @@ function renderCart() {
             totalPrice += itemTotal;
             
             let customizationString = '';
-            if (item.sugar || item.ice || (item.toppings && item.toppings.length > 0)) {
+            if (item.sugar !== 'N/A' || item.ice !== 'N/A' || (item.toppings && item.toppings.length > 0)) {
                 const toppingsNames = item.toppings.map(t => t.name).join(', ');
                 customizationString = ` (${item.sugar} đường, ${item.ice} đá${toppingsNames ? `, Topping: ${toppingsNames}` : ''})`;
             }
@@ -157,9 +206,9 @@ function renderCart() {
             const cartItemHtml = `
                 <div class="cart-item">
                     <div class="order-details">
-                        <span>${item.name}${customizationString}</span>
+                        <span>${item.name} (SL: ${item.quantity})${customizationString}</span>
                         <br>
-                        <span>${item.price.toLocaleString('vi-VN')} VNĐ x ${item.quantity}</span>
+                        <span>${(item.price * item.quantity).toLocaleString('vi-VN')} VNĐ</span>
                     </div>
                     <div class="order-actions">
                         <button class="decrease-quantity-btn" data-index="${index}">-</button>
@@ -172,7 +221,8 @@ function renderCart() {
             cartDiv.innerHTML += cartItemHtml;
         });
     }
-    document.getElementById('totalPrice').innerText = totalPrice.toLocaleString('vi-VN');
+
+    totalPriceSpan.innerText = totalPrice.toLocaleString('vi-VN');
 
     document.querySelectorAll('.increase-quantity-btn').forEach(button => {
         button.addEventListener('click', (e) => {
@@ -210,6 +260,9 @@ function showOrderModal(orderType) {
     const modal = document.getElementById('orderModal');
     const orderModalTitle = document.getElementById('orderModalTitle');
     const orderOptionsDiv = document.getElementById('orderOptions');
+    
+    if (!modal || !orderModalTitle || !orderOptionsDiv) return;
+
     orderOptionsDiv.innerHTML = ''; 
 
     if (orderType === 'dine-in') {
@@ -227,29 +280,44 @@ function showOrderModal(orderType) {
     orderOptionsDiv.innerHTML += `<textarea id="orderNote" placeholder="Ghi chú"></textarea>`;
 
     modal.style.display = 'flex';
-    document.getElementById('submitOrderBtn').dataset.orderType = orderType;
+    const submitBtn = document.getElementById('submitOrderBtn');
+    if (submitBtn) {
+        submitBtn.dataset.orderType = orderType;
+    }
 }
 
 function closeOrderModal() {
-    document.getElementById('orderModal').style.display = 'none';
+    const modal = document.getElementById('orderModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 async function submitOrder() {
-    const orderType = document.getElementById('submitOrderBtn').dataset.orderType;
+    const submitBtn = document.getElementById('submitOrderBtn');
+    if (!submitBtn) return;
+    
+    const orderType = submitBtn.dataset.orderType;
     let customerInfo = {};
-    const orderNote = document.getElementById('orderNote').value;
+    const orderNoteEl = document.getElementById('orderNote');
+    const orderNote = orderNoteEl ? orderNoteEl.value : '';
 
     if (orderType === 'dine-in') {
-        const tableNumber = document.getElementById('tableNumber').value;
+        const tableNumberEl = document.getElementById('tableNumber');
+        const tableNumber = tableNumberEl ? tableNumberEl.value : '';
         if (!tableNumber) {
             alert("Vui lòng nhập số bàn!");
             return;
         }
         customerInfo = { type: 'Uống tại chỗ', tableNumber };
     } else if (orderType === 'delivery') {
-        const customerName = document.getElementById('customerName').value;
-        const phone = document.getElementById('phone').value;
-        const address = document.getElementById('address').value;
+        const customerNameEl = document.getElementById('customerName');
+        const phoneEl = document.getElementById('phone');
+        const addressEl = document.getElementById('address');
+        const customerName = customerNameEl ? customerNameEl.value : '';
+        const phone = phoneEl ? phoneEl.value : '';
+        const address = addressEl ? addressEl.value : '';
+        
         if (!customerName || !phone || !address) {
             alert("Vui lòng điền đầy đủ thông tin giao hàng!");
             return;
@@ -260,14 +328,20 @@ async function submitOrder() {
         return;
     }
 
+    const totalPriceSpan = document.getElementById('totalPrice');
+    if (!totalPriceSpan) {
+        alert("Không tìm thấy tổng tiền, vui lòng tải lại trang!");
+        return;
+    }
+
     const newOrder = {
         items: cart,
         customerInfo: customerInfo,
-        totalPrice: parseFloat(document.getElementById('totalPrice').innerText.replace(/[^0-9]/g, '')),
+        totalPrice: parseFloat(totalPriceSpan.innerText.replace(/[^0-9]/g, '')),
         status: 'Đang chờ xử lý',
         isPaid: false,
         note: orderNote,
-        createdAt: new Date() // Lưu dưới dạng Timestamp của Firebase
+        createdAt: new Date()
     };
     
     try {
@@ -286,13 +360,33 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMenu();
     renderCart();
 
-    document.getElementById('dineInBtn').addEventListener('click', () => showOrderModal('dine-in'));
-    document.getElementById('deliveryBtn').addEventListener('click', () => showOrderModal('delivery'));
+    const dineInBtn = document.getElementById('dineInBtn');
+    if (dineInBtn) {
+        dineInBtn.addEventListener('click', () => showOrderModal('dine-in'));
+    }
 
-    document.getElementById('submitOrderBtn').addEventListener('click', submitOrder);
+    const deliveryBtn = document.getElementById('deliveryBtn');
+    if (deliveryBtn) {
+        deliveryBtn.addEventListener('click', () => showOrderModal('delivery'));
+    }
+
+    const submitOrderBtn = document.getElementById('submitOrderBtn');
+    if (submitOrderBtn) {
+        submitOrderBtn.addEventListener('click', submitOrder);
+    }
     
-    document.getElementById('addToCartModalBtn').addEventListener('click', addToCartFromModal);
+    const addToCartModalBtn = document.getElementById('addToCartModalBtn');
+    if (addToCartModalBtn) {
+        addToCartModalBtn.addEventListener('click', addToCartFromModal);
+    }
     
-    document.getElementById('closeCustomizationModal').addEventListener('click', closeCustomizationModal);
-    document.getElementById('closeOrderModal').addEventListener('click', closeOrderModal);
+    const closeCustomizationModalBtn = document.getElementById('closeCustomizationModal');
+    if (closeCustomizationModalBtn) {
+        closeCustomizationModalBtn.addEventListener('click', closeCustomizationModal);
+    }
+
+    const closeOrderModalBtn = document.getElementById('closeOrderModal');
+    if (closeOrderModalBtn) {
+        closeOrderModalBtn.addEventListener('click', closeOrderModal);
+    }
 });
